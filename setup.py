@@ -4,10 +4,10 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(name='MerOC',
-      version='0.1.8',
-      description='Software for the netCDF files download/manipulations',
+      version='0.1.9',
+      description='Software to download/manipulate netCDF files',
       long_description=long_description,
-      url="http://example.com/HelloWorld/",
+      url="https://github.com/carmelosammarco/MerOC",
       author='Carmelo Sammarco',
       author_email='sammarcocarmelo@gmail.com',
       license='gpl-3.0',

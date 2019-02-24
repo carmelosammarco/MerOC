@@ -32,59 +32,28 @@ import sys
 import cdo
 
 import pkg_resources
-#######################################
-#General 
 
-#photo = pkg_resources.resource_filename('MerOC','image.gif')
+#######################################
+
 
 def main(args=None):
     
     window = Tk()
 
 
-    #photo = pkg_resources.resource_filename('MerOC','image.gif')
-    #photo = PhotoImage(file = "pic.gif")
-    #w= photo.width()
-    #h=photo.height()
-    #window.geometry("%dx%d+50+30" %(w,h))
-    #cv = Canvas(window)
-    #cv.pack(side='top', fill='x')
-    #cv.create_image(0,0, image=photo, anchor='nw')
-
-
     window.title("MerOC-CSammarco")
-    #window.geometry('600x900')
+    
 
 
     tab_control = ttk.Notebook(window)
 
-    tab0 = ttk.Frame(tab_control)
+    
     tab1 = ttk.Frame(tab_control)
     tab2 = ttk.Frame(tab_control)
 
-    tab_control.add(tab0, text='Intro')
-    tab_control.add(tab1, text='Download')
-    tab_control.add(tab2, text='netCDF-processing')
-
-    ##########################
-    #INTRO
-    T = Text(tab0, height=28, width=70)
-    T.pack()
-    testo = """
-    - This CMEMS tools simplify the product's downloads and it allows to subset them by region, variables, depths and time coverage [format:"yyyy-mm-dd 00:00:00"].
-
-    - The download mecchanism  is strictly related with the data time coverage. Infact for a very large time window (ex. years or for more than 2 months data) it is wiser use the "Download-monthly" method (it generates one file for month) while for few days the simple "Download" od "Download daily" method need to be used (the former generates just one output file while the latter a file for each day in a specific HH:MM:SS time window).
-
-    - The "netCDF-processing" tab is able to convert the Netcdf files in different formats (as CSV, GRD and Shape files) and it is able to concatenate segments of data coming from the same dataset but at different time steps. For the conversions, however, there is the limitation about the maximum numbers of records that python can analyse in the same time. 
-    Probably slit the netCDF file can be a solution if the problem arises. In fact, It is possible split the data by day(DD), months(YYYYMM) and years(YYYY) with the option to add a suffix to the so generated data. 
-
-    - For suggestions or improvments please to contact Carmelo Sammarco,creator of this tools 
-
-    (carmelo.sammarco@akka.eu)
-
-    Enjoy!
-    """
-    T.insert(END,testo)
+    
+    tab_control.add(tab1, text='netCDF-Download')
+    tab_control.add(tab2, text='netCDF-Manipulation')
 
 
 
