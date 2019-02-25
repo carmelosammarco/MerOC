@@ -1,6 +1,6 @@
 # MerOC Python-GUI tool - Download/manipulate netCDF files
 
-## This tool simplify the CMEMS product's downloads/manipulations. The download mechanisms, which allow to subset the CMEMS products by bounding box, variables, depths and time coverage, are particularly useful because they allow to receive the data as one single file or  in dayly or montly chunks. The free registration to the CMEMS web portal (by Copernicus) is required to be able to use the download functions. The other fuction doesn't require any registration and can be fredomly used.
+## This tool simplify the CMEMS product's downloads/manipulations. The download mechanisms, which allow to subset the CMEMS products by bounding box, variables, depths and time coverage, are particularly useful because they allow to retrieve the data as one single file or in dayly or montly chunks. The free registration to the CMEMS web portal (by Copernicus) is required to be able to use the download functions. The other fuction doesn't require any registration and can be fredomly used.
 
 ### Please to be noted that:
 
