@@ -1,7 +1,7 @@
 #####################################################################
 #Programm for Mercator Ocean by Carmelo Sammarco
 #####################################################################
-#Import modules needed#
+#Import modules 
 
 import xarray as xr
 import pandas as pd
@@ -41,7 +41,7 @@ def main(args=None):
     window = Tk()
 
 
-    window.title("MerOC-CSammarco")
+    window.title("MerOC-by-CSammarco")
     
 
 
@@ -55,13 +55,10 @@ def main(args=None):
     tab_control.add(tab1, text='netCDF-Download')
     tab_control.add(tab2, text='netCDF-Manipulation')
 
-
-
-    ########################################
+    #################
     #TAB 1 
-    #######################
     #Functions
-    ##################
+    #################
 
     Voutmc1 = StringVar()
 
@@ -75,7 +72,7 @@ def main(args=None):
         os.system(inputValue)
 
 
-    ################################################################################
+    #################################################
     #For download mechanisms
 
     a = []
@@ -88,9 +85,9 @@ def main(args=None):
     hhstart = str()
     hhend = str()
 
-    ########################3
+    ########################
     #Download daily
-    #############################
+    ########################
 
     def downloaddaily():
 
@@ -160,6 +157,7 @@ def main(args=None):
             Us,Pw,Mot,Pr,Ds,Longmin,Longmax,Latmin,Latmax,sd,ed,v1,Outdir,fname = listnew
 
             #and then finally I obtain the Parameters in the correct format
+
             cmems_user = str(Us)
             cmems_pass = str(Pw)
 
@@ -250,16 +248,8 @@ def main(args=None):
                         mt.motu_api.execute_request(_opts)
 
                         if not line: 
-                            break
-                        
-
-                    #for line in f:
-                        #line = line.strip()
-                        #lines.append(line[0:10])  
-
-                        
-
-                            
+                            break 
+             
 
         elif dV == 1 and nV == 1:
         
@@ -799,9 +789,9 @@ def main(args=None):
                             break
 
 
-    #########
+    #######################
     #Download MONTHLY!! 
-    ##########################
+    #######################
 
     def downloadmotumontly1():
 
@@ -1559,8 +1549,7 @@ def main(args=None):
             _opts = load_options(default_values)
             mt.motu_api.execute_request(_opts)
     
-    ###########################################
-    ########
+    #########################################
     # LOGIC TO GENERATE LINK for DOWNLOAD....
 
     dmi1 = StringVar()
@@ -1898,9 +1887,8 @@ def main(args=None):
     hhmmsstxte = Label(tab1, text="Daily [END]-time (HH:MM:SS)")
     hhmmsstxte.grid(column=1, row=36)
 
-    ######################################################################################
+    ########################################
     #TAB 2
-    ###########
     #FUNCTIONS
     ###########
 
@@ -1908,10 +1896,8 @@ def main(args=None):
         clicked1.netCDF_file = filedialog.askopenfilename()
 
 
-    
     def clicked2():
         clicked2.Home_dir = filedialog.askdirectory()
-
 
 
     def clicked3(): 
@@ -1921,7 +1907,6 @@ def main(args=None):
         data = pd.read_csv(clicked2.Home_dir +"/file.csv")
         data.dropna().to_csv(clicked2.Home_dir + "/file_cleaned.csv", index = False)
         
-
 
     def clicked4():
         ds = xr.open_dataset(clicked1.netCDF_file, decode_times=False)
@@ -1999,38 +1984,15 @@ def main(args=None):
         os.remove(clicked2.Home_dir +"/file.csv")
         os.remove(clicked2.Home_dir +"/file_cleaned.csv")
 
-        #schema = { 'geometry': 'Point', 'properties': { Vr.get() : 'float' } }
-        #with collection(clicked2.Home_dir +"/file.shp", "w", "ESRI Shapefile", schema) as output:
-            #with open(clicked2.Home_dir + "/file_cleaned.csv", 'r') as f:
-                #reader = csv.DictReader(f)
-                #for row in reader:
-                    #point = Point(float(row['lon']), float(row['lat']))
-                    #output.write({
-                            #'properties': {
-                                #Vr.get(): row[ Vr.get() ]
-                            #},
-                            #'geometry': mapping(point)
-                    #})
-        
-        #os.remove(clicked2.Home_dir +"/file.csv")
-        #os.remove(clicked2.Home_dir +"/file_cleaned.csv")
-
 
 
 
     def clicked5():
-        #dsmerged = xr.merge([xr.open_dataset(f) for f in glob.glob(clicked2.Home_dir + "/*.nc")[:2]])
-        #dsmerged = xr.merge([xr.open_dataset(f) for f in glob.glob(clicked2.Home_dir + "/*.nc")])
-        #dsmerged = xr.open_mfdataset(clicked2.Home_dir + "/*.nc")
-        #dsmerged.to_netcdf(clicked2.Home_dir + "/Concatenated.nc")
-        #dsmerged.close()
         command = "cdo mergetime  " + clicked2.Home_dir +"/*.nc  " +  clicked2.Home_dir + "/Concatenated.nc"
         print(command)
         os.system(command)
 
 
-
-        
     def clicked6():
         if typedmy.get() == "DAY":
             command = "cdo splitday" +"  " + clicked1.netCDF_file + "  " + clicked2.Home_dir +"/"+ Suffix.get()
@@ -2057,28 +2019,22 @@ def main(args=None):
         command = "cdo  -f grb copy  " + clicked1.netCDF_file  + "   " + clicked2.Home_dir + "/Convert.grb"
         print(command)
         os.system(command)
-        
 
-        
-    #########################
     #END FUNCTIONS
     ##########################
+
 
     space = Label(tab2, text="")
     space.grid(column=1, row=0)
     ###
-
     btn = Button(tab2, text="Select file", bg="yellow", command=clicked1)
     btn.grid(column=0, row=1)
-
     ###
     space = Label(tab2, text="")
     space.grid(column=0, row=2)
     ###
-
     btn = Button(tab2, text="Select folder", bg="yellow", command=clicked2)
     btn.grid(column=0, row=3)
-
     ###
     space = Label(tab2, text="")
     space.grid(column=0, row=4)
@@ -2138,9 +2094,8 @@ def main(args=None):
     grib = Label(tab2, text="Select file and folder")
     grib.grid(column=1, row=16)
 
-    #####################################################################################
+    #################################################################
 
     tab_control.pack(expand=1, fill='both')
-    #tab_control.pack()
-
+    
     window.mainloop()
