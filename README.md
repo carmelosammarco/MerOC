@@ -1,9 +1,127 @@
-# MerOC Python-GUI tool - Download/manipulate netCDF files
+# MerOC
 
-## This tool simplify the CMEMS product's downloads/manipulations. The download mechanisms, which allow to subset the CMEMS products by bounding box, variables, depths and time coverage, are particularly useful because they allow to retrieve the data as one single file or in daily or montly chunks. The free registration to the CMEMS web portal (by Copernicus) is required to be able to use the download functions. The other fuction doesn't require any registration and can be fredomly used.
+Python software (in Development) containing functions for simplifing the download, manipulations and visualization of netCDF files.The free registration to the CMEMS web portal (by Copernicus) is required to be able to use the download functions. The other fuction doesn’t require any registration to be used. 
 
-### Please to be noted that:
+## Dependencies:
 
-##### The download mechanism  is strictly related with the data time coverage. In fact for a very large time window (ex. years or for more than 2 months data) it is wiser use the "Download-monthly" method (it generates one file for month) while for few days the simple "Download" od "Download daily" method can be used (the former generates just one output file while the latter a file for each day). In the "Download daily" can be specified the HH:mm:ss for both the file starting and ending foreach daily file(This fuction can be used when for example interested to a recurrent time each day)
+In the setup.py it is possible have a look to all the dependencies required which are listed below:
 
-##### The "netCDF-processing" at the moment is able to convert the netCDF files in different formats (CSV, GRD and shape files) concatenate segments of data coming from the same dataset but at different time steps and split in fuction of the time. The splitting process can be useful in many occasions. At the moment, the files conversions are afflicted by the python memory records storage limitation which  can be analysed in the same time. Then slit the netCDF file can be a solution if the problem arises (the implememtation of parallel computing could be the solution - Using Dask for example). It is possible split the data by day(DD), months(YYYYMM) and years(YYYY) with the additional option to add a suffix to the data generated.
+- [x]  'basemap'
+- [x]  'netCDF4>=1.4.2'
+- [x]  'ftputil>=3.4'
+- [x]  'motuclient>=1.8.1'
+- [x]  'csv342>=1.0.0'
+- [x]  'pandas>=0.23.4'
+- [x]  'xarray>=0.11.0' 
+- [x]  'csv342>=1.0.0'
+- [x]  'shapely>=1.6.4.post2'
+- [x]  'fiona>=1.8.4' 
+- [x]  'cdo>=1.4.0'
+- [x]  'moviepy>=0.2.3.5'
+- [x]  'matplotlib>=3.0.2'
+- [x]  'numpy>=1.15.4'
+
+    
+## Installation:
+
+To use this software is suggested the creation of a python environment (python ~=3.6). It becames mandatory if your python version is part of the 2.* family. Following few basic instructions if interesed to install the module in a new ad-hoc environment.
+
+### Procedure for the Anaconda python distribution:
+
+- conda update conda (To update the Anaconda distribution)
+
+- conda create -n {your_env_name} python=3.6 (For the creation of a python environment)
+
+- conda list (List all the environments installed)
+
+- conda activate {your_env_name} (Activate the chosen environment)
+
+- conda activate (to come back to the initial environment)
+
+### Procedure for the standard python distribution:
+
+- pip install pipenv (installation of the package needed)
+
+- create project folder 
+
+- pipenv pipenv --python 3.6 (Install the python environment inside the project folder)
+
+
+### MerOC installation using:
+
+- pip install MerOC: 
+
+For Anaconda users and the command can be executed from every path locations. 
+ 
+- pipenv install MerOC:
+
+For python standard distribution users. The command needs to be run inside the project folder.
+
+
+## Functions included:
+
+The program is divided into two tabs. The first tab is exslusively used by the download mechanisms while the second tab contains tools for the manipulation/visualization of netCDF files. More details following below:
+
+### TAB 1: Download mechanisms
+
+They allow to subset the CMEMS products by bounding box, variables, depths and time coverage. They allow to retrieve the data by day, month, depth or just as a single file. The way to download is strictly related to the data time coverage. In fact for a very large time window (ex. years or anyway for more than 2 months of data) it is wiser use the “Download-monthly” method (which generates one file for month) while for few days the simple “Download” and “Download daily” method can be used (the former generates just one output file while the latter a file for each day). In the “Download daily” can be specified the HH:MM:SS for both the starting and ending foreach daily file (This fuction can be used when for example interested to a same time-window)
+
+
+### TAB 2: Manipulation and visualization of netCDF files
+
+This tab at the moment is able to convert the netCDF files in different formats (CSV, GRD and shape files), concatenate segments of data coming from the same dataset but at different time steps and split in fuction of the time. It is possible split the data by day(DD), months(YYYYMM) and years(YYYY) with the additional option to add a suffix to the data generated. More details about the functions included with a brief description is dispayed below. All these function  are also distributed as separate module named [tool4nc](https://pypi.org/project/tool4nc/).
+
+#### nctocsv ("path_input file", "path_output folder")
+
+This function converts a netCDF file to a csv file. It will generate two csv files called file.csv and file_cleaned.csv respectively. The file_cleaned.csv is cleaned by all the NAN values and it is considered the final output file of this function.
+
+#### nctoshape ("path_input file", "path_output folder", "variable_name")
+
+This function converts a netCDF file into a shape file (Point features). Firstly, it will generate two csv files called file.csv and file_cleaned.csv respectively. After that, the file_cleaned.csv (purified by all the NAN values) is used to extract the corresponding shapefile representing a variable’s values which is the third argument of this function.
+
+#### nctogrd ("path_input file", "path_output folder")
+
+This function converts a netCDF file into a GRD file. 
+
+#### concatnc ("path_input folder")
+
+This function can concatenate segments of data coming from the same dataset but at different time steps. It will generate a file called “concatenated.nc” as result. The only argument needed is the folder where the files are located.
+
+#### splitnc ("path_input file",  "path_output folder", "type", "suffix")
+
+This function can split the data by type; DAY (DD), MONTH (YYYYMM) and YEAR (YYYY). It gives the option to add a suffix to the generated data.
+
+#### plotintime ("path_input file","variable_name","path_output folder",frame_for_second)
+
+This fuction is able to generate a dynamic plot showing the variation of the selected variable in fuction of the time steps recorded into. 
+
+## Be aware that:
+
+This software is in development so it can be possible find bugs, errors and imprecisions. Please to report them if you can. In the speciphic the major improvment need to be done with:
+
+#### - The plotintime fuction: 
+
+It works just in particular conditions in which "lat" and "lon" are the metadata name attributes for both latitude and longitude and the input file has just one depth record. In the next future i will try to let it works for other latitude/longitude metadata record names. As long term project the aim is to use both data at single depth and with multi-depths. For the latter I would like let the user decide in which  level focus on and also be able to display variation in fuction of depth. 
+
+#### - The downwload by depth function:
+
+In some occasion and with some dataset, the fuction is not able to retrieve the data. Probably related to the metadata depth information stored. 
+
+
+## Others useful information:
+
+I am working to realise a guide/tutorial so to help you to understand its use in different contexts and needs. 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+

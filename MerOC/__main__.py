@@ -3,6 +3,10 @@
 #####################################################################
 #Import modules 
 
+import pkg_resources
+
+from xml.etree import cElementTree as ET
+
 import xarray as xr
 import pandas as pd
 import os
@@ -18,21 +22,26 @@ from tkinter import messagebox
 from tkinter import ttk
 from tkinter import scrolledtext
 
-
 import datetime as dt
 import time
 import calendar
-
 import motuclient as mt
 from motuclient import motu_api
 import ftputil
 import netCDF4
-
 import sys
 import cdo
-
 import pkg_resources
 
+import moviepy.editor as mpy
+import glob
+import matplotlib as mpl
+from mpl_toolkits.basemap import Basemap
+from matplotlib.dates import date2num, num2date
+from matplotlib import cm
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+import numpy as np
 #######################################
 
 
@@ -40,11 +49,13 @@ def main(args=None):
     
     window = Tk()
 
+    image = pkg_resources.resource_filename('MerOC', 'Data/Mercator.gif')
+    photo = PhotoImage(file=image)
+    cv = Canvas(window)
+    cv.pack(side='top', fill='x')
+    cv.create_image(0,0, image=photo, anchor='nw')
 
     window.title("MerOC-by-CSammarco")
-    
-
-
     tab_control = ttk.Notebook(window)
 
     
@@ -1548,6 +1559,208 @@ def main(args=None):
 
             _opts = load_options(default_values)
             mt.motu_api.execute_request(_opts)
+
+
+
+    #######################
+    #Download By DEPTH!! 
+    #######################
+
+    def downloadbydepth1():
+
+        def countX(lst, x):
+            count = 0
+            for ele in a:
+                if (ele==x):
+                    count = count+1
+            return count
+
+
+        def extract_from_link(lista):
+            for element in lista:
+                e = element.split(' ')[1]
+                listnew.append(e)
+
+        def extractstart(listast):
+            for element in listast:
+                e = element.split(' ')
+                styyyymmdd.append(e)
+
+
+        def extractend(listaend):
+            for element in listaend:
+                e = element.split(' ')
+                endyyyymmdd.append(e)
+
+
+        def load_options(default_values):
+            class cmemsval(dict):
+                pass
+            values=cmemsval()
+            for k,v in default_values.items():
+                setattr(values, k, v)
+            return values
+
+
+        
+        info = "--describe-product"
+        inputValue = txt1.get("1.0","end-1c") +" "+ info
+        print (inputValue)
+        os.system(inputValue)
+
+        modname = fname1.get()[:-3]
+        #print (modname)
+
+        tree = ET.parse(Voutmc1.get()+"/"+ modname + ".xml")
+        root = tree.getroot()
+        depth = root[2].text
+        listadepth = []
+        listadepth = depth.split(';')
+        #print (listadepth)
+
+
+        inputValue = txt1.get("1.21",'end-1c')
+        #print (inputValue)
+        a = inputValue.split()
+        nV = countX(a, x)
+        
+
+        if nV == 1:
+
+            lista = inputValue.split('--')[1:]
+            listnew = []
+            extract_from_link(lista)
+            Us,Pw,Mot,Pr,Ds,Longmin,Longmax,Latmin,Latmax,sd,ed,dmin,dmax,v1,Outdir,fname = listnew
+
+            #and then finally I obtain the Parameters in the correct format
+
+            cmems_user = str(Us)
+            cmems_pass = str(Pw)
+
+            proxy_user = None
+            proxy_pass = None
+            proxy_server = None
+
+            outputdir = str(Outdir)
+            outputname = str(fname)
+            motu_server = str(Mot)
+            product_id = str(Pr)
+            dataset_id = str(Ds)
+
+            depth_min = float(dmin)
+            depth_max = float(dmax)
+
+            lon_min = float(Longmin)
+            lon_max = float(Longmax)
+            lat_min = float(Latmin)
+            lat_max = float(Latmax)
+            
+            tmin = str(sd)
+            tmax = str(ed)
+            
+            for z in listadepth:
+    
+                outputname = "CMEMS_" + tmin[0:10] + "_"+ tmax[0:10] + "_" + "numVar["+ str(nV) +"]_" + product_id + "_" + dataset_id +"Depth=" +z +".nc"
+
+                default_values = {'date_min': tmin,'date_max': tmax,'depth_min': str(z), 'depth_max': str(z),'longitude_max': lon_max,'longitude_min': lon_min,'latitude_min': lat_min,'latitude_max': lat_max,'describe': None, 'auth_mode': 'cas', 'motu': motu_server,'block_size': 65536, 'log_level': 30, 'out_dir': outputdir,'socket_timeout': None,'sync': None,  'proxy_server': proxy_server,'proxy_user': proxy_user,'proxy_pwd': proxy_pass, 'user': cmems_user, 'pwd': cmems_pass,'variable': [v1],'product_id': dataset_id,'service_id': product_id,'user_agent': None,'out_name': outputname, 'outputWritten': 'netcdf','size' : '','console_mode': ''}
+        
+                #print (default_values)
+                print(outputname)
+                
+                _opts = load_options(default_values)
+                mt.motu_api.execute_request(_opts)
+    
+        if nV == 2:
+
+            lista = inputValue.split('--')[1:]
+            listnew = []
+            extract_from_link(lista)
+            Us,Pw,Mot,Pr,Ds,Longmin,Longmax,Latmin,Latmax,sd,ed,dmin,dmax,v1,v2,Outdir,fname = listnew
+
+            #and then finally I obtain the Parameters in the correct format
+
+            cmems_user = str(Us)
+            cmems_pass = str(Pw)
+
+            proxy_user = None
+            proxy_pass = None
+            proxy_server = None
+
+            outputdir = str(Outdir)
+            outputname = str(fname)
+            motu_server = str(Mot)
+            product_id = str(Pr)
+            dataset_id = str(Ds)
+
+            depth_min = float(dmin)
+            depth_max = float(dmax)
+
+            lon_min = float(Longmin)
+            lon_max = float(Longmax)
+            lat_min = float(Latmin)
+            lat_max = float(Latmax)
+            
+            tmin = str(sd)
+            tmax = str(ed)
+            
+            for z in listadepth:
+    
+                outputname = "CMEMS_" + tmin[0:10] + "_"+ tmax[0:10] + "_" + "numVar["+ str(nV) +"]_" + product_id + "_" + dataset_id +"Depth=" +z +".nc"
+
+                default_values = {'date_min': tmin,'date_max': tmax,'depth_min': z, 'depth_max': z,'longitude_max': lon_max,'longitude_min': lon_min,'latitude_min': lat_min,'latitude_max': lat_max,'describe': None, 'auth_mode': 'cas', 'motu': motu_server,'block_size': 65536, 'log_level': 30, 'out_dir': outputdir,'socket_timeout': None,'sync': None,  'proxy_server': proxy_server,'proxy_user': proxy_user,'proxy_pwd': proxy_pass, 'user': cmems_user, 'pwd': cmems_pass,'variable': [v1,v2],'product_id': dataset_id,'service_id': product_id,'user_agent': None,'out_name': outputname, 'outputWritten': 'netcdf','size' : '','console_mode': ''}
+        
+                #print (default_values)
+                print(outputname)
+                
+                _opts = load_options(default_values)
+                mt.motu_api.execute_request(_opts)
+
+        if nV == 3:
+
+            lista = inputValue.split('--')[1:]
+            listnew = []
+            extract_from_link(lista)
+            Us,Pw,Mot,Pr,Ds,Longmin,Longmax,Latmin,Latmax,sd,ed,dmin,dmax,v1,v2,v3,Outdir,fname = listnew
+
+            #and then finally I obtain the Parameters in the correct format
+
+            cmems_user = str(Us)
+            cmems_pass = str(Pw)
+
+            proxy_user = None
+            proxy_pass = None
+            proxy_server = None
+
+            outputdir = str(Outdir)
+            outputname = str(fname)
+            motu_server = str(Mot)
+            product_id = str(Pr)
+            dataset_id = str(Ds)
+
+            depth_min = float(dmin)
+            depth_max = float(dmax)
+
+            lon_min = float(Longmin)
+            lon_max = float(Longmax)
+            lat_min = float(Latmin)
+            lat_max = float(Latmax)
+            
+            tmin = str(sd)
+            tmax = str(ed)
+            
+            for z in listadepth:
+    
+                outputname = "CMEMS_" + tmin[0:10] + "_"+ tmax[0:10] + "_" + "numVar["+ str(nV) +"]_" + product_id + "_" + dataset_id +"Depth=" +z +".nc"
+
+                default_values = {'date_min': tmin,'date_max': tmax,'depth_min': z, 'depth_max': z,'longitude_max': lon_max,'longitude_min': lon_min,'latitude_min': lat_min,'latitude_max': lat_max,'describe': None, 'auth_mode': 'cas', 'motu': motu_server,'block_size': 65536, 'log_level': 30, 'out_dir': outputdir,'socket_timeout': None,'sync': None,  'proxy_server': proxy_server,'proxy_user': proxy_user,'proxy_pwd': proxy_pass, 'user': cmems_user, 'pwd': cmems_pass,'variable': [v1,v2,v3],'product_id': dataset_id,'service_id': product_id,'user_agent': None,'out_name': outputname, 'outputWritten': 'netcdf','size' : '','console_mode': ''}
+        
+                #print (default_values)
+                print(outputname)
+                
+                _opts = load_options(default_values)
+                mt.motu_api.execute_request(_opts)
+
+
     
     #########################################
     # LOGIC TO GENERATE LINK for DOWNLOAD....
@@ -1870,22 +2083,35 @@ def main(args=None):
     ##
     btn1 = Button(tab1, text="Download as monthly files", bg="red", command=downloadmotumontly1)
     btn1.grid(column=0, row=32)
-    ###
-    space1 = Label(tab1, text="")
-    space1.grid(column=0, row=33)
+    
     ###
 
-    btn1 = Button(tab1, text="Download as daily files", bg="red", command=downloaddaily)
+    btn1 = Button(tab1, text="Download by depths", bg="red", command=downloadbydepth1)
     btn1.grid(column=0, row=34)
 
+    ###
+    space1 = Label(tab1, text="")
+    space1.grid(column=0, row=35)
+
+    btn1 = Button(tab1, text="Download as daily files", bg="red", command=downloaddaily)
+    btn1.grid(column=0, row=36)
+
+    
     hhmmssentrystart = Entry(tab1, width=13)
-    hhmmssentrystart.grid(column=0, row=35)
+    hhmmssentrystart.grid(column=0, row=37)
     hhmmsstxts = Label(tab1, text="Daily [START]-time (HH:MM:SS)")
-    hhmmsstxts.grid(column=1, row=35)
+    hhmmsstxts.grid(column=1, row=37)
     hhmmssentryend = Entry(tab1, width=13)
-    hhmmssentryend.grid(column=0, row=36)
+    hhmmssentryend.grid(column=0, row=38)
     hhmmsstxte = Label(tab1, text="Daily [END]-time (HH:MM:SS)")
-    hhmmsstxte.grid(column=1, row=36)
+    hhmmsstxte.grid(column=1, row=38)
+
+    #space1 = Label(tab1, text="")
+    #space1.grid(column=0, row=37)
+
+    #btn1 = Button(tab1, text="Download by depths", bg="red", command=downloadbydepth1)
+    #btn1.grid(column=0, row=38)
+    
 
     ########################################
     #TAB 2
@@ -1903,19 +2129,19 @@ def main(args=None):
     def clicked3(): 
         ds = xr.open_dataset(clicked1.netCDF_file, decode_times=False)
         df = ds.to_dataframe()
-        df.to_csv(clicked2.Home_dir + "/file.csv")
-        data = pd.read_csv(clicked2.Home_dir +"/file.csv")
-        data.dropna().to_csv(clicked2.Home_dir + "/file_cleaned.csv", index = False)
+        df.to_csv(clicked2.Home_dir + "/Data.csv")
+        data = pd.read_csv(clicked2.Home_dir +"/Data.csv")
+        data.dropna().to_csv(clicked2.Home_dir + "/Data_cleaned.csv", index = False)
         
 
     def clicked4():
         ds = xr.open_dataset(clicked1.netCDF_file, decode_times=False)
         df = ds.to_dataframe()
-        df.to_csv(clicked2.Home_dir + "/file.csv")
-        data = pd.read_csv(clicked2.Home_dir +"/file.csv")
-        data.dropna().to_csv(clicked2.Home_dir + "/file_cleaned.csv", index = False)
+        df.to_csv(clicked2.Home_dir + "/Data.csv")
+        data = pd.read_csv(clicked2.Home_dir +"/Data.csv")
+        data.dropna().to_csv(clicked2.Home_dir + "/Data_cleaned.csv", index = False)
 
-        filecsv = open(clicked2.Home_dir + "/file_cleaned.csv")
+        filecsv = open(clicked2.Home_dir + "/Data_cleaned.csv")
         listed=[]
         line = filecsv.readline()
         for u in line.split(','):
@@ -1923,8 +2149,8 @@ def main(args=None):
         
         if 'lat' in listed:
             schema = { 'geometry': 'Point', 'properties': { Vr.get() : 'float' } }
-            with collection(clicked2.Home_dir +"/file.shp", "w", "ESRI Shapefile", schema) as output:
-                with open(clicked2.Home_dir + "/file_cleaned.csv", 'r') as f:
+            with collection(clicked2.Home_dir +"/DataPoints.shp", "w", "ESRI Shapefile", schema) as output:
+                with open(clicked2.Home_dir + "/Data_cleaned.csv", 'r') as f:
                     reader = csv.DictReader(f)
                     for row in reader:
                         point = Point(float(row['lon']), float(row['lat']))
@@ -1937,8 +2163,8 @@ def main(args=None):
                     
         elif 'Lat' in listed:
             schema = { 'geometry': 'Point', 'properties': { Vr.get() : 'float' } }
-            with collection(clicked2.Home_dir +"/file.shp", "w", "ESRI Shapefile", schema) as output:
-                with open(clicked2.Home_dir + "/file_cleaned.csv", 'r') as f:
+            with collection(clicked2.Home_dir +"/DataPoints.shp", "w", "ESRI Shapefile", schema) as output:
+                with open(clicked2.Home_dir + "/Data_cleaned.csv", 'r') as f:
                     reader = csv.DictReader(f)
                     for row in reader:
                         point = Point(float(row['Lon']), float(row['Lat']))
@@ -1951,8 +2177,8 @@ def main(args=None):
                     
         elif 'Latitude' in listed:
             schema = { 'geometry': 'Point', 'properties': { Vr.get() : 'float' } }
-            with collection(clicked2.Home_dir +"/file.shp", "w", "ESRI Shapefile", schema) as output:
-                with open(clicked2.Home_dir + "/file_cleaned.csv", 'r') as f:
+            with collection(clicked2.Home_dir +"/DataPoints.shp", "w", "ESRI Shapefile", schema) as output:
+                with open(clicked2.Home_dir + "/Data_cleaned.csv", 'r') as f:
                     reader = csv.DictReader(f)
                     for row in reader:
                         point = Point(float(row['Longitude']), float(row['Latitude']))
@@ -1965,8 +2191,8 @@ def main(args=None):
                     
         elif 'latitude' in listed:
             schema = { 'geometry': 'Point', 'properties': { Vr.get() : 'float' } }
-            with collection(clicked2.Home_dir +"/file.shp", "w", "ESRI Shapefile", schema) as output:
-                with open(clicked2.Home_dir + "/file_cleaned.csv", 'r') as f:
+            with collection(clicked2.Home_dir +"/DataPoints.shp", "w", "ESRI Shapefile", schema) as output:
+                with open(clicked2.Home_dir + "/Data_cleaned.csv", 'r') as f:
                     reader = csv.DictReader(f)
                     for row in reader:
                         point = Point(float(row['longitude']), float(row['latitude']))
@@ -1979,10 +2205,10 @@ def main(args=None):
                     
         else:
             messagebox.showinfo('Warning', 'Need to be added a new text format. Please contact Carmelo!')
-            print("Need to be added a new text format. Please contact Carmelo!")
+            #print("Need to be added a new text format. Please contact Carmelo!")
         
-        os.remove(clicked2.Home_dir +"/file.csv")
-        os.remove(clicked2.Home_dir +"/file_cleaned.csv")
+        os.remove(clicked2.Home_dir +"/Data.csv")
+        os.remove(clicked2.Home_dir +"/Data_cleaned.csv")
 
 
 
@@ -2016,14 +2242,73 @@ def main(args=None):
 
 
     def clicked7():
-        command = "cdo  -f grb copy  " + clicked1.netCDF_file  + "   " + clicked2.Home_dir + "/Convert.grb"
+        command = "cdo  -f grb copy  " + clicked1.netCDF_file  + "   " + clicked2.Home_dir + "/Data.grb"
         print(command)
         os.system(command)
 
+
+    def dirtyplot():
+
+        with xr.open_dataset(clicked1.netCDF_file) as ds:
+            #print(title)
+            minvar = eval("ds."+Vtime.get()+".min()")
+            maxvar = eval("ds."+Vtime.get()+".max()")
+            print (minvar)
+            print (maxvar)
+
+            for t in range(ds.time.shape[0]):
+                da = eval("ds."+Vtime.get()+".isel(time=t)")
+                num = date2num(ds.time[t])
+                date = num2date(num)
+                title = ds.title+"-"+str(date)
+                plt.figure(figsize=(10,5))
+                lat  = ds.variables['lat'][:]
+                lon  = ds.variables['lon'][:]
+                plt.title(title, fontsize=10)
+                #plt.xlabel("Longitude", fontsize=30)
+                #plt.ylabel("Latitude", fontsize=30)
+                
+                m=Basemap(projection='mill',lat_ts=10,llcrnrlon=lon.min(), \
+                urcrnrlon=lon.max(),llcrnrlat=lat.min(),urcrnrlat=lat.max(), \
+                resolution='l')
+                
+                m.drawcoastlines()
+                m.fillcontinents()
+                m.drawmapboundary()
+                m.drawparallels(np.arange(-80., 81., 10.), labels=[1,0,0,0], fontsize=10)
+                m.drawmeridians(np.arange(-180., 181., 10.), labels=[0,0,0,1], fontsize=10)
+
+                x, y = m(*np.meshgrid(lon,lat))
+                col = m.pcolormesh(x,y,da,shading='flat',cmap=cm.get_cmap("jet"), vmin=minvar, vmax=maxvar)
+                cbar = plt.colorbar(col)
+                cbar.ax.yaxis.set_ticks_position('left')
+
+                for I in cbar.ax.yaxis.get_ticklabels():
+                    I.set_size(10)
+
+                cbar.set_label(Vtime.get(), size = 10)
+
+                plt.savefig(clicked2.Home_dir + '/frame{}.png'.format(t), dpi=300) 
+
+            a = int(fps.get())
+            gif_name = clicked1.netCDF_file + "_" + Vtime.get() 
+            file_list = glob.glob(clicked2.Home_dir +'/*.png') # Get all the pngs in the current directory
+            file_list.sort(key=os.path.getmtime) # Sort the images by time, this may need to be tweaked for your use case
+            clip = mpy.ImageSequenceClip(file_list, fps=a)
+            clip.write_gif('{}.gif'.format(gif_name), fps=a)
+            clip2 = mpy.VideoFileClip(clicked1.netCDF_file + "_" + Vtime.get() + ".gif")
+            clip2.write_videofile(clicked1.netCDF_file + "_" + Vtime.get() +  ".mp4")
+            path = str(clicked2.Home_dir+"/")
+            folder = os.listdir(path)
+
+            for item in folder:
+                if item.endswith(".png"):
+                    os.remove(os.path.join(path, item))
+
+                    
+
     #END FUNCTIONS
     ##########################
-
-
     space = Label(tab2, text="")
     space.grid(column=1, row=0)
     ###
@@ -2093,6 +2378,23 @@ def main(args=None):
     btn.grid(column=0, row=16)
     grib = Label(tab2, text="Select file and folder")
     grib.grid(column=1, row=16)
+
+    space = Label(tab2, text="")
+    space.grid(column=0, row=17)
+
+    btn = Button(tab2, text="Plot Variable_VS_time", bg="red", command=dirtyplot)
+    btn.grid(column=0, row=18)
+    grib = Label(tab2, text="Select file and folder")
+    grib.grid(column=1, row=18)
+    VarVStime = Label(tab2, text="Variable to display --> ")
+    VarVStime.grid(column=1, row=19)
+    Vtime = Entry(tab2, width=8)
+    Vtime.grid(column=2, row=19)
+
+    Framexsec = Label(tab2, text="Fps (frames for second) --> ")
+    Framexsec.grid(column=1, row=20)
+    fps = Entry(tab2, width=8)
+    fps.grid(column=2, row=20)
 
     #################################################################
 
