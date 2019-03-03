@@ -2,26 +2,19 @@
 #Programm for Mercator Ocean by Carmelo Sammarco
 #####################################################################
 #Import modules 
-
 import pkg_resources
-
 from xml.etree import cElementTree as ET
-
 import xarray as xr
 import pandas as pd
 import os
-
 import csv342 as csv
 from shapely.geometry import Point, mapping
 from fiona import collection
-
-
 from tkinter import *
 from tkinter import filedialog
 from tkinter import messagebox
 from tkinter import ttk
 from tkinter import scrolledtext
-
 import datetime as dt
 import time
 import calendar
@@ -31,17 +24,6 @@ import ftputil
 import netCDF4
 import sys
 import cdo
-import pkg_resources
-
-import moviepy.editor as mpy
-import glob
-import matplotlib as mpl
-from mpl_toolkits.basemap import Basemap
-from matplotlib.dates import date2num, num2date
-from matplotlib import cm
-import matplotlib.pyplot as plt
-import matplotlib.animation as animation
-import numpy as np
 #######################################
 
 
@@ -2246,65 +2228,6 @@ def main(args=None):
         print(command)
         os.system(command)
 
-
-    def dirtyplot():
-
-        with xr.open_dataset(clicked1.netCDF_file) as ds:
-            #print(title)
-            minvar = eval("ds."+Vtime.get()+".min()")
-            maxvar = eval("ds."+Vtime.get()+".max()")
-            print (minvar)
-            print (maxvar)
-
-            for t in range(ds.time.shape[0]):
-                da = eval("ds."+Vtime.get()+".isel(time=t)")
-                num = date2num(ds.time[t])
-                date = num2date(num)
-                title = ds.title+"-"+str(date)
-                plt.figure(figsize=(10,5))
-                lat  = ds.variables['lat'][:]
-                lon  = ds.variables['lon'][:]
-                plt.title(title, fontsize=10)
-                #plt.xlabel("Longitude", fontsize=30)
-                #plt.ylabel("Latitude", fontsize=30)
-                
-                m=Basemap(projection='mill',lat_ts=10,llcrnrlon=lon.min(), \
-                urcrnrlon=lon.max(),llcrnrlat=lat.min(),urcrnrlat=lat.max(), \
-                resolution='l')
-                
-                m.drawcoastlines()
-                m.fillcontinents()
-                m.drawmapboundary()
-                m.drawparallels(np.arange(-80., 81., 10.), labels=[1,0,0,0], fontsize=10)
-                m.drawmeridians(np.arange(-180., 181., 10.), labels=[0,0,0,1], fontsize=10)
-
-                x, y = m(*np.meshgrid(lon,lat))
-                col = m.pcolormesh(x,y,da,shading='flat',cmap=cm.get_cmap("jet"), vmin=minvar, vmax=maxvar)
-                cbar = plt.colorbar(col)
-                cbar.ax.yaxis.set_ticks_position('left')
-
-                for I in cbar.ax.yaxis.get_ticklabels():
-                    I.set_size(10)
-
-                cbar.set_label(Vtime.get(), size = 10)
-
-                plt.savefig(clicked2.Home_dir + '/frame{}.png'.format(t), dpi=300) 
-
-            a = int(fps.get())
-            gif_name = clicked1.netCDF_file + "_" + Vtime.get() 
-            file_list = glob.glob(clicked2.Home_dir +'/*.png') # Get all the pngs in the current directory
-            file_list.sort(key=os.path.getmtime) # Sort the images by time, this may need to be tweaked for your use case
-            clip = mpy.ImageSequenceClip(file_list, fps=a)
-            clip.write_gif('{}.gif'.format(gif_name), fps=a)
-            clip2 = mpy.VideoFileClip(clicked1.netCDF_file + "_" + Vtime.get() + ".gif")
-            clip2.write_videofile(clicked1.netCDF_file + "_" + Vtime.get() +  ".mp4")
-            path = str(clicked2.Home_dir+"/")
-            folder = os.listdir(path)
-
-            for item in folder:
-                if item.endswith(".png"):
-                    os.remove(os.path.join(path, item))
-
                     
 
     #END FUNCTIONS
@@ -2378,23 +2301,6 @@ def main(args=None):
     btn.grid(column=0, row=16)
     grib = Label(tab2, text="Select file and folder")
     grib.grid(column=1, row=16)
-
-    space = Label(tab2, text="")
-    space.grid(column=0, row=17)
-
-    btn = Button(tab2, text="Plot Variable_VS_time", bg="red", command=dirtyplot)
-    btn.grid(column=0, row=18)
-    grib = Label(tab2, text="Select file and folder")
-    grib.grid(column=1, row=18)
-    VarVStime = Label(tab2, text="Variable to display --> ")
-    VarVStime.grid(column=1, row=19)
-    Vtime = Entry(tab2, width=8)
-    Vtime.grid(column=2, row=19)
-
-    Framexsec = Label(tab2, text="Fps (frames for second) --> ")
-    Framexsec.grid(column=1, row=20)
-    fps = Entry(tab2, width=8)
-    fps.grid(column=2, row=20)
 
     #################################################################
 
