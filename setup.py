@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(name='MerOC',
-      version='0.2.3',
+      version='0.2.4',
       description='Software to download/manipulate netCDF files',
       long_description=long_description,
       long_description_content_type='text/markdown',
@@ -27,7 +27,6 @@ setup(name='MerOC',
       ],
 
       install_requires=[
-        'basemap',
         'netCDF4>=1.4.2',
         'ftputil>=3.4',
         'motuclient>=1.8.1',
