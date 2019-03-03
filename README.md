@@ -6,15 +6,15 @@ Python software (in Development) containing functions for simplifing the downloa
 
 In the setup.py it is possible have a look to all the dependencies required which are listed below:
 
-[x]  netCDF4>=1.4.2
-[x]  ftputil>=3.4
-[x]  motuclient>=1.8.1
-[x]  pandas>=0.23.4
-[x]  xarray>=0.11.0 
-[x]  csv342>=1.0.0
-[x]  shapely>=1.6.4.post2
-[x]  fiona>=1.8.4
-[x]  cdo>=1.4.0
+- [x]  netCDF4>=1.4.2
+- [x]  ftputil>=3.4
+- [x]  motuclient>=1.8.1
+- [x]  pandas>=0.23.4
+- [x]  xarray>=0.11.0 
+- [x]  csv342>=1.0.0
+- [x]  shapely>=1.6.4.post2
+- [x]  fiona>=1.8.4
+- [x]  cdo>=1.4.0
 
 
 ## Be aware that:
@@ -68,7 +68,7 @@ The program is divided into two tabs. The first tab is exslusively used by the d
 
 ### TAB 1: Download mechanisms
 
-They allow to subset the CMEMS products by bounding box, variables, depths and time coverage. They allow to retrieve the data by day, month, depth or just as a single file. The way to download is strictly related to the data time coverage. In fact for a very large time window (ex. years or anyway for more than 2 months of data) it is wiser use the “Download-monthly” method (which generates one file for month) while for few days the simple “Download” and “Download daily” method can be used (the former generates just one output file while the latter a file for each day). In the “Download daily” can be specified the HH:MM:SS for both the starting and ending foreach daily file (This fuction can be used when for example interested to a same time-window)
+They allow to subset the CMEMS products by bounding box, variables, depths and time coverage and then download it by day, month, depth or just as a single file. The way to download is strictly related to the data time coverage. In fact for a very large time window (ex. years or anyway for more than 2 months of data) it is wiser use the “Download-monthly” method (which generates one file for month) while for few days the simple “Download” and “Download daily” method can be used (the former generates just one output file while the latter a file for each day). In the “Download daily” can be specified the HH:MM:SS for both the starting and ending foreach daily file (This fuction can be used when for example interested to a same time-window)
 
 
 ### TAB 2: Manipulations of netCDF files

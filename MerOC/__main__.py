@@ -26,7 +26,6 @@ import sys
 import cdo
 #######################################
 
-
 def main(args=None):
     
     window = Tk()
