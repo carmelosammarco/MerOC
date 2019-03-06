@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(name='MerOC',
-      version='0.2.6',
+      version='0.2.7',
       description='Software to download/manipulate netCDF files',
       long_description=long_description,
       long_description_content_type='text/markdown',
@@ -18,7 +18,9 @@ setup(name='MerOC',
 
       include_package_data=True,
       package_data={
-       'MerOC': ['Data/Mercator.gif'],
+       'MerOC': ['DATA/LOGO.gif'],
+       'MerOC': ['DATA/MerOC.png'],
+       
       },
 
       install_requires=[
@@ -27,8 +29,7 @@ setup(name='MerOC',
         'motuclient>=1.8.1',
         'csv342>=1.0.0', 
         'pandas>=0.23.4', 
-        'xarray>=0.11.0', 
-        'csv342>=1.0.0', 
+        'xarray>=0.11.0',  
         'shapely>=1.6.4.post2', 
         'fiona>=1.8.4', 
         'cdo>=1.4.0'

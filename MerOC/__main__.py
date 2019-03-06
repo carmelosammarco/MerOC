@@ -3,6 +3,7 @@
 #####################################################################
 #Import modules 
 import pkg_resources
+
 from xml.etree import cElementTree as ET
 import xarray as xr
 import pandas as pd
@@ -10,42 +11,50 @@ import os
 import csv342 as csv
 from shapely.geometry import Point, mapping
 from fiona import collection
+
 from tkinter import *
 from tkinter import filedialog
 from tkinter import messagebox
 from tkinter import ttk
 from tkinter import scrolledtext
 import datetime as dt
+
 import time
 import calendar
+
 import motuclient as mt
 from motuclient import motu_api
 import ftputil
+
 import netCDF4
 import sys
 import cdo
+
+import platform
+
 #######################################
+#if platform.system()=="Linux" or platform.system()=="Windows":
+        
 
 def main(args=None):
     
     window = Tk()
 
-    image = pkg_resources.resource_filename('MerOC', 'Data/Mercator.gif')
+    image = pkg_resources.resource_filename('MerOC', 'DATA/LOGO.gif')
     photo = PhotoImage(file=image)
-    cv = Canvas(window)
+    w = photo.width()
+    h = photo.height()
+    cv = Canvas(window, width=w, height=h)
     cv.pack(side='top', fill='x')
-    cv.create_image(0,0, image=photo, anchor='nw')
+    cv.create_image(0,0, image=photo, anchor='nw') 
 
-    window.title("MerOC-by-CSammarco")
     tab_control = ttk.Notebook(window)
-
-    
     tab1 = ttk.Frame(tab_control)
     tab2 = ttk.Frame(tab_control)
-
-    
     tab_control.add(tab1, text='netCDF-Download')
     tab_control.add(tab2, text='netCDF-Manipulation')
+
+    window.title("MerOC-by-CSammarco")
 
     #################
     #TAB 1 
@@ -206,8 +215,8 @@ def main(args=None):
             default_values = {'date_min': str(date_min),'date_max': str(date_max),'depth_min': '', 'depth_max': '','longitude_max': lon_max,'longitude_min': lon_min,'latitude_min': lat_min,'latitude_max': lat_max,'describe': None, 'auth_mode': 'cas', 'motu': motu_server,'block_size': 65536, 'log_level': 30, 'out_dir': outputdir,'socket_timeout': None,'sync': None,  'proxy_server': proxy_server,'proxy_user': proxy_user,'proxy_pwd': proxy_pass, 'user': cmems_user, 'pwd': cmems_pass,'variable': [v1],'product_id': dataset_id,'service_id': product_id,'user_agent': None,'out_name': outputname, 'outputWritten': 'netcdf','size' : '','console_mode': ''}
 
             
-            hhstart = str(hhmmssentrystart.get())
-            hhend = str(hhmmssentryend.get())
+            hhstart = str(hhstartentry.get())
+            hhend = str(hhendentry.get())
 
             start = dt.datetime(year1,month1,d1,0,0)
             end = dt.datetime(year2,month2,d2,0,0)
@@ -896,8 +905,8 @@ def main(args=None):
             month2 = int(mmend[0])
             d2 = int(dde[0])
 
-            hhstar = str(hhmmssentrystart.get())
-            hhend = str(hhmmssentryend.get())
+            hhstar = str(hhstartentry.get())
+            hhend = str(hhendentry.get())
 
             default_values = {'date_min': str(date_min),'date_max': str(date_max),'depth_min': '', 'depth_max': '','longitude_max': lon_max,'longitude_min': lon_min,'latitude_min': lat_min,'latitude_max': lat_max,'describe': None, 'auth_mode': 'cas', 'motu': motu_server,'block_size': 65536, 'log_level': 30, 'out_dir': outputdir,'socket_timeout': None,'sync': None,  'proxy_server': proxy_server,'proxy_user': proxy_user,'proxy_pwd': proxy_pass, 'user': cmems_user, 'pwd': cmems_pass,'variable': [v1],'product_id': dataset_id,'service_id': product_id,'user_agent': None,'out_name': outputname, 'outputWritten': 'netcdf','size' : '','console_mode': ''}
 
@@ -1016,8 +1025,8 @@ def main(args=None):
             #print(date_start)
             #print(date_end)
 
-            hhstar = str(hhmmssentrystart.get())
-            hhend = str(hhmmssentryend.get())
+            hhstar = str(hhstartentry.get())
+            hhend = str(hhendentry.get())
 
             default_values = {'date_min': str(date_min),'date_max': str(date_max),'depth_min': depth_min, 'depth_max': depth_max,'longitude_max': lon_max,'longitude_min': lon_min,'latitude_min': lat_min,'latitude_max': lat_max,'describe': None, 'auth_mode': 'cas', 'motu': motu_server,'block_size': 65536, 'log_level': 30, 'out_dir': outputdir,'socket_timeout': None,'sync': None,  'proxy_server': proxy_server,'proxy_user': proxy_user,'proxy_pwd': proxy_pass, 'user': cmems_user, 'pwd': cmems_pass,'variable': [v1],'product_id': dataset_id,'service_id': product_id,'user_agent': None,'out_name': outputname, 'outputWritten': 'netcdf','size' : '','console_mode': ''}
 
@@ -1134,8 +1143,8 @@ def main(args=None):
             #print(date_start)
             #print(date_end)
 
-            hhstar = str(hhmmssentrystart.get())
-            hhend = str(hhmmssentryend.get())
+            hhstar = str(hhstartentry.get())
+            hhend = str(hhendentry.get())
 
             default_values = {'date_min': str(date_min),'date_max': str(date_max),'depth_min': '', 'depth_max': '','longitude_max': lon_max,'longitude_min': lon_min,'latitude_min': lat_min,'latitude_max': lat_max,'describe': None, 'auth_mode': 'cas', 'motu': motu_server,'block_size': 65536, 'log_level': 30, 'out_dir': outputdir,'socket_timeout': None,'sync': None,  'proxy_server': proxy_server,'proxy_user': proxy_user,'proxy_pwd': proxy_pass, 'user': cmems_user, 'pwd': cmems_pass,'variable': [v1,v2],'product_id': dataset_id,'service_id': product_id,'user_agent': None,'out_name': outputname, 'outputWritten': 'netcdf','size' : '','console_mode': ''}
 
@@ -1252,8 +1261,8 @@ def main(args=None):
             #print(date_start)
             #print(date_end)
 
-            hhstar = str(hhmmssentrystart.get())
-            hhend = str(hhmmssentryend.get())
+            hhstar = str(hhstartentry.get())
+            hhend = str(hhendentry.get())
 
             default_values = {'date_min': str(date_min),'date_max': str(date_max),'depth_min': depth_min, 'depth_max': depth_max,'longitude_max': lon_max,'longitude_min': lon_min,'latitude_min': lat_min,'latitude_max': lat_max,'describe': None, 'auth_mode': 'cas', 'motu': motu_server,'block_size': 65536, 'log_level': 30, 'out_dir': outputdir,'socket_timeout': None,'sync': None,  'proxy_server': proxy_server,'proxy_user': proxy_user,'proxy_pwd': proxy_pass, 'user': cmems_user, 'pwd': cmems_pass,'variable': [v1,v2],'product_id': dataset_id,'service_id': product_id,'user_agent': None,'out_name': outputname, 'outputWritten': 'netcdf','size' : '','console_mode': ''}
 
@@ -1369,8 +1378,8 @@ def main(args=None):
             #print(date_start)
             #print(date_end)
 
-            hhstar = str(hhmmssentrystart.get())
-            hhend = str(hhmmssentryend.get())
+            hhstar = str(hhstartentry.get())
+            hhend = str(hhendentry.get())
 
             default_values = {'date_min': str(date_min),'date_max': str(date_max),'depth_min': '', 'depth_max': '','longitude_max': lon_max,'longitude_min': lon_min,'latitude_min': lat_min,'latitude_max': lat_max,'describe': None, 'auth_mode': 'cas', 'motu': motu_server,'block_size': 65536, 'log_level': 30, 'out_dir': outputdir,'socket_timeout': None,'sync': None,  'proxy_server': proxy_server,'proxy_user': proxy_user,'proxy_pwd': proxy_pass, 'user': cmems_user, 'pwd': cmems_pass,'variable': [v1,v2,v3],'product_id': dataset_id,'service_id': product_id,'user_agent': None,'out_name': outputname, 'outputWritten': 'netcdf','size' : '','console_mode': ''}
 
@@ -1487,8 +1496,8 @@ def main(args=None):
             #print(date_start)
             #print(date_end)
 
-            hhstar = str(hhmmssentrystart.get())
-            hhend = str(hhmmssentryend.get())
+            hhstar = str(hhstartentry.get())
+            hhend = str(hhendentry.get())
 
             default_values = {'date_min': str(date_min),'date_max': str(date_max),'depth_min': depth_min, 'depth_max': depth_max,'longitude_max': lon_max,'longitude_min': lon_min,'latitude_min': lat_min,'latitude_max': lat_max,'describe': None, 'auth_mode': 'cas', 'motu': motu_server,'block_size': 65536, 'log_level': 30, 'out_dir': outputdir,'socket_timeout': None,'sync': None,  'proxy_server': proxy_server,'proxy_user': proxy_user,'proxy_pwd': proxy_pass, 'user': cmems_user, 'pwd': cmems_pass,'variable': [v1,v2,v3],'product_id': dataset_id,'service_id': product_id,'user_agent': None,'out_name': outputname, 'outputWritten': 'netcdf','size' : '','console_mode': ''}
 
@@ -1562,17 +1571,6 @@ def main(args=None):
                 e = element.split(' ')[1]
                 listnew.append(e)
 
-        def extractstart(listast):
-            for element in listast:
-                e = element.split(' ')
-                styyyymmdd.append(e)
-
-
-        def extractend(listaend):
-            for element in listaend:
-                e = element.split(' ')
-                endyyyymmdd.append(e)
-
 
         def load_options(default_values):
             class cmemsval(dict):
@@ -1636,14 +1634,20 @@ def main(args=None):
             lat_min = float(Latmin)
             lat_max = float(Latmax)
             
-            tmin = str(sd)
-            tmax = str(ed)
+            t1= sd[0:10]
+            t2= ed[0:10]
+
+            hhstar = str(hhstartentry.get())
+            hhend = str(hhendentry.get())
+
+            tmin = t1 + " " + hhstar
+            tmax = t2 + " " + hhend
             
             for z in listadepth:
     
                 outputname = "CMEMS_" + tmin[0:10] + "_"+ tmax[0:10] + "_" + "numVar["+ str(nV) +"]_" + product_id + "_" + dataset_id +"Depth=" +z +".nc"
 
-                default_values = {'date_min': tmin,'date_max': tmax,'depth_min': str(z), 'depth_max': str(z),'longitude_max': lon_max,'longitude_min': lon_min,'latitude_min': lat_min,'latitude_max': lat_max,'describe': None, 'auth_mode': 'cas', 'motu': motu_server,'block_size': 65536, 'log_level': 30, 'out_dir': outputdir,'socket_timeout': None,'sync': None,  'proxy_server': proxy_server,'proxy_user': proxy_user,'proxy_pwd': proxy_pass, 'user': cmems_user, 'pwd': cmems_pass,'variable': [v1],'product_id': dataset_id,'service_id': product_id,'user_agent': None,'out_name': outputname, 'outputWritten': 'netcdf','size' : '','console_mode': ''}
+                default_values = {'date_min': str(tmin),'date_max': str(tmax),'depth_min': str(z), 'depth_max': str(z),'longitude_max': lon_max,'longitude_min': lon_min,'latitude_min': lat_min,'latitude_max': lat_max,'describe': None, 'auth_mode': 'cas', 'motu': motu_server,'block_size': 65536, 'log_level': 30, 'out_dir': outputdir,'socket_timeout': None,'sync': None,  'proxy_server': proxy_server,'proxy_user': proxy_user,'proxy_pwd': proxy_pass, 'user': cmems_user, 'pwd': cmems_pass,'variable': [v1],'product_id': dataset_id,'service_id': product_id,'user_agent': None,'out_name': outputname, 'outputWritten': 'netcdf','size' : '','console_mode': ''}
         
                 #print (default_values)
                 print(outputname)
@@ -1651,7 +1655,7 @@ def main(args=None):
                 _opts = load_options(default_values)
                 mt.motu_api.execute_request(_opts)
     
-        if nV == 2:
+        elif nV == 2:
 
             lista = inputValue.split('--')[1:]
             listnew = []
@@ -1681,22 +1685,28 @@ def main(args=None):
             lat_min = float(Latmin)
             lat_max = float(Latmax)
             
-            tmin = str(sd)
-            tmax = str(ed)
+            t1= sd[0:10]
+            t2= ed[0:10]
+
+            hhstar = str(hhstartentry.get())
+            hhend = str(hhendentry.get())
+
+            tmin = t1 + " " + hhstar
+            tmax = t2 + " " + hhend
             
             for z in listadepth:
     
                 outputname = "CMEMS_" + tmin[0:10] + "_"+ tmax[0:10] + "_" + "numVar["+ str(nV) +"]_" + product_id + "_" + dataset_id +"Depth=" +z +".nc"
 
-                default_values = {'date_min': tmin,'date_max': tmax,'depth_min': z, 'depth_max': z,'longitude_max': lon_max,'longitude_min': lon_min,'latitude_min': lat_min,'latitude_max': lat_max,'describe': None, 'auth_mode': 'cas', 'motu': motu_server,'block_size': 65536, 'log_level': 30, 'out_dir': outputdir,'socket_timeout': None,'sync': None,  'proxy_server': proxy_server,'proxy_user': proxy_user,'proxy_pwd': proxy_pass, 'user': cmems_user, 'pwd': cmems_pass,'variable': [v1,v2],'product_id': dataset_id,'service_id': product_id,'user_agent': None,'out_name': outputname, 'outputWritten': 'netcdf','size' : '','console_mode': ''}
-        
+                default_values = {'date_min': str(tmin),'date_max': str(tmax),'depth_min': str(z), 'depth_max': str(z),'longitude_max': lon_max,'longitude_min': lon_min,'latitude_min': lat_min,'latitude_max': lat_max,'describe': None, 'auth_mode': 'cas', 'motu': motu_server,'block_size': 65536, 'log_level': 30, 'out_dir': outputdir,'socket_timeout': None,'sync': None,  'proxy_server': proxy_server,'proxy_user': proxy_user,'proxy_pwd': proxy_pass, 'user': cmems_user, 'pwd': cmems_pass,'variable': [v1,v2],'product_id': dataset_id,'service_id': product_id,'user_agent': None,'out_name': outputname, 'outputWritten': 'netcdf','size' : '','console_mode': ''}
+
                 #print (default_values)
                 print(outputname)
                 
                 _opts = load_options(default_values)
                 mt.motu_api.execute_request(_opts)
 
-        if nV == 3:
+        elif nV == 3:
 
             lista = inputValue.split('--')[1:]
             listnew = []
@@ -1726,14 +1736,20 @@ def main(args=None):
             lat_min = float(Latmin)
             lat_max = float(Latmax)
             
-            tmin = str(sd)
-            tmax = str(ed)
+            t1= sd[0:10]
+            t2= ed[0:10]
+
+            hhstar = str(hhstartentry.get())
+            hhend = str(hhendentry.get())
+
+            tmin = t1 + " " + hhstar
+            tmax = t2 + " " + hhend
             
             for z in listadepth:
     
                 outputname = "CMEMS_" + tmin[0:10] + "_"+ tmax[0:10] + "_" + "numVar["+ str(nV) +"]_" + product_id + "_" + dataset_id +"Depth=" +z +".nc"
 
-                default_values = {'date_min': tmin,'date_max': tmax,'depth_min': z, 'depth_max': z,'longitude_max': lon_max,'longitude_min': lon_min,'latitude_min': lat_min,'latitude_max': lat_max,'describe': None, 'auth_mode': 'cas', 'motu': motu_server,'block_size': 65536, 'log_level': 30, 'out_dir': outputdir,'socket_timeout': None,'sync': None,  'proxy_server': proxy_server,'proxy_user': proxy_user,'proxy_pwd': proxy_pass, 'user': cmems_user, 'pwd': cmems_pass,'variable': [v1,v2,v3],'product_id': dataset_id,'service_id': product_id,'user_agent': None,'out_name': outputname, 'outputWritten': 'netcdf','size' : '','console_mode': ''}
+                default_values = {'date_min': str(tmin),'date_max': str(tmax),'depth_min': str(z), 'depth_max': str(z),'longitude_max': lon_max,'longitude_min': lon_min,'latitude_min': lat_min,'latitude_max': lat_max,'describe': None, 'auth_mode': 'cas', 'motu': motu_server,'block_size': 65536, 'log_level': 30, 'out_dir': outputdir,'socket_timeout': None,'sync': None,  'proxy_server': proxy_server,'proxy_user': proxy_user,'proxy_pwd': proxy_pass, 'user': cmems_user, 'pwd': cmems_pass,'variable': [v1,v2,v3],'product_id': dataset_id,'service_id': product_id,'user_agent': None,'out_name': outputname, 'outputWritten': 'netcdf','size' : '','console_mode': ''}
         
                 #print (default_values)
                 print(outputname)
@@ -1741,8 +1757,8 @@ def main(args=None):
                 _opts = load_options(default_values)
                 mt.motu_api.execute_request(_opts)
 
-
-    
+        else:
+            print("Something went wrong")
     #########################################
     # LOGIC TO GENERATE LINK for DOWNLOAD....
 
@@ -2064,35 +2080,21 @@ def main(args=None):
     ##
     btn1 = Button(tab1, text="Download as monthly files", bg="red", command=downloadmotumontly1)
     btn1.grid(column=0, row=32)
-    
     ###
-
+    btn1 = Button(tab1, text="Download as daily files", bg="red", command=downloaddaily)
+    btn1.grid(column=0, row=33)
+    ###
     btn1 = Button(tab1, text="Download by depths", bg="red", command=downloadbydepth1)
     btn1.grid(column=0, row=34)
-
-    ###
-    space1 = Label(tab1, text="")
-    space1.grid(column=0, row=35)
-
-    btn1 = Button(tab1, text="Download as daily files", bg="red", command=downloaddaily)
-    btn1.grid(column=0, row=36)
-
     
-    hhmmssentrystart = Entry(tab1, width=13)
-    hhmmssentrystart.grid(column=0, row=37)
-    hhmmsstxts = Label(tab1, text="Daily [START]-time (HH:MM:SS)")
-    hhmmsstxts.grid(column=1, row=37)
-    hhmmssentryend = Entry(tab1, width=13)
-    hhmmssentryend.grid(column=0, row=38)
-    hhmmsstxte = Label(tab1, text="Daily [END]-time (HH:MM:SS)")
-    hhmmsstxte.grid(column=1, row=38)
-
-    #space1 = Label(tab1, text="")
-    #space1.grid(column=0, row=37)
-
-    #btn1 = Button(tab1, text="Download by depths", bg="red", command=downloadbydepth1)
-    #btn1.grid(column=0, row=38)
-    
+    #hhmmssentrystart = hhstartentry.get()
+    #hhmmssentrystart.grid(column=0, row=37)
+    #hhmmsstxts = Label(tab1, text="Daily [START]-time (HH:MM:SS)")
+    #hhmmsstxts.grid(column=1, row=37)
+    #hhmmssentryend = hhendentry.get()
+    #hhmmssentryend.grid(column=0, row=38)
+    #hhmmsstxte = Label(tab1, text="Daily [END]-time (HH:MM:SS)")
+    #hhmmsstxte.grid(column=1, row=38)
 
     ########################################
     #TAB 2
@@ -2254,16 +2256,18 @@ def main(args=None):
     btn.grid(column=0, row=6)
     Conc = Label(tab2, text="Select file and folder")
     Conc.grid(column=1, row=6)
-    ##
-    space = Label(tab2, text="")
-    space.grid(column=0, row=7)
     ###
     btn = Button(tab2, text="Convert to shapefile", bg="red", command=clicked4)
-    btn.grid(column=0, row=8)
+    btn.grid(column=0, row=7)
     Var = Label(tab2, text="Select file and Variable =")
-    Var.grid(column=1, row=8)
-    Vr = Entry(tab2, width=8)
-    Vr.grid(column=2, row=8)
+    Var.grid(column=1, row=7)
+    Vr = Entry(tab2, width=7)
+    Vr.grid(column=2, row=7)
+    ##
+    btn = Button(tab2, text="Convert to grib", bg="red", command=clicked7)
+    btn.grid(column=0, row=8)
+    grib = Label(tab2, text="Select file and folder")
+    grib.grid(column=1, row=8)
     ##
     space = Label(tab2, text="")
     space.grid(column=0, row=9)
@@ -2273,10 +2277,9 @@ def main(args=None):
     Conc = Label(tab2, text="Select folder")
     Conc.grid(column=1, row=10)
     ###
-    ##
     space = Label(tab2, text="")
     space.grid(column=0, row=11)
-    ###
+
     btn = Button(tab2, text="Split NetCDF files", bg="red", command=clicked6)
     btn.grid(column=0, row=12)
 
@@ -2293,16 +2296,14 @@ def main(args=None):
     Suffix = Entry(tab2, width=8) 
     Suffix.grid(column=2, row=14)
 
-    space = Label(tab2, text="")
-    space.grid(column=0, row=15)
+    #space = Label(tab2, text="")
+    #space.grid(column=0, row=16)
 
-    btn = Button(tab2, text="Convert to grib", bg="red", command=clicked7)
-    btn.grid(column=0, row=16)
-    grib = Label(tab2, text="Select file and folder")
-    grib.grid(column=1, row=16)
+    
 
     #################################################################
 
     tab_control.pack(expand=1, fill='both')
-    
+
     window.mainloop()
+
