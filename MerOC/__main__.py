@@ -30,11 +30,12 @@ import netCDF4
 import sys
 import cdo
 
+import math
+
 import platform
 
 #######################################
 #if platform.system()=="Linux" or platform.system()=="Windows":
-        
 
 def main(args=None):
     
@@ -133,7 +134,6 @@ def main(args=None):
             while curr <= ed:
                 yield curr
                 curr += delta
-        
         
         #################
 
@@ -1597,7 +1597,6 @@ def main(args=None):
         listadepth = depth.split(';')
         #print (listadepth)
 
-
         inputValue = txt1.get("1.21",'end-1c')
         #print (inputValue)
         a = inputValue.split()
@@ -1644,16 +1643,28 @@ def main(args=None):
             tmax = t2 + " " + hhend
             
             for z in listadepth:
-    
-                outputname = "CMEMS_" + tmin[0:10] + "_"+ tmax[0:10] + "_" + "numVar["+ str(nV) +"]_" + product_id + "_" + dataset_id +"Depth=" +z +".nc"
 
-                default_values = {'date_min': str(tmin),'date_max': str(tmax),'depth_min': str(z), 'depth_max': str(z),'longitude_max': lon_max,'longitude_min': lon_min,'latitude_min': lat_min,'latitude_max': lat_max,'describe': None, 'auth_mode': 'cas', 'motu': motu_server,'block_size': 65536, 'log_level': 30, 'out_dir': outputdir,'socket_timeout': None,'sync': None,  'proxy_server': proxy_server,'proxy_user': proxy_user,'proxy_pwd': proxy_pass, 'user': cmems_user, 'pwd': cmems_pass,'variable': [v1],'product_id': dataset_id,'service_id': product_id,'user_agent': None,'out_name': outputname, 'outputWritten': 'netcdf','size' : '','console_mode': ''}
-        
-                #print (default_values)
-                print(outputname)
+                def truncate(f, n):
+                    return math.floor(f * 10 ** n) / 10 ** n 
                 
+                zformat = truncate(float(z), 2)
+                z1 = zformat
+                z2 = float(zformat) + 0.01
+    
+                outputname1 = "CMEMS_" + tmin[0:10] + "_"+ tmax[0:10] + "_" + "numVar["+ str(nV) +"]_" + product_id + "_" + dataset_id +"-Depth=" +z +".nc"
+                default_values = {'date_min': str(tmin),'date_max': str(tmax),'depth_min': str(z), 'depth_max': str(z),'longitude_max': lon_max,'longitude_min': lon_min,'latitude_min': lat_min,'latitude_max': lat_max,'describe': None, 'auth_mode': 'cas', 'motu': motu_server,'block_size': 65536, 'log_level': 30, 'out_dir': outputdir,'socket_timeout': None,'sync': None,  'proxy_server': proxy_server,'proxy_user': proxy_user,'proxy_pwd': proxy_pass, 'user': cmems_user, 'pwd': cmems_pass,'variable': [v1],'product_id': dataset_id,'service_id': product_id,'user_agent': None,'out_name': outputname1, 'outputWritten': 'netcdf','size' : '','console_mode': ''}
+                #print (default_values)
+                print(outputname1)
                 _opts = load_options(default_values)
                 mt.motu_api.execute_request(_opts)
+
+                outputname2 = "CMEMS_" + tmin[0:10] + "_"+ tmax[0:10] + "_" + "numVar["+ str(nV) +"]_" + product_id + "_" + dataset_id +"-Depth=" +z +".nc"
+                default_values = {'date_min': str(tmin),'date_max': str(tmax),'depth_min': str(z1), 'depth_max': str(z2),'longitude_max': lon_max,'longitude_min': lon_min,'latitude_min': lat_min,'latitude_max': lat_max,'describe': None, 'auth_mode': 'cas', 'motu': motu_server,'block_size': 65536, 'log_level': 30, 'out_dir': outputdir,'socket_timeout': None,'sync': None,  'proxy_server': proxy_server,'proxy_user': proxy_user,'proxy_pwd': proxy_pass, 'user': cmems_user, 'pwd': cmems_pass,'variable': [v1],'product_id': dataset_id,'service_id': product_id,'user_agent': None,'out_name': outputname2, 'outputWritten': 'netcdf','size' : '','console_mode': ''}
+                print(outputname2)
+                _opts = load_options(default_values)
+                mt.motu_api.execute_request(_opts)
+
+
     
         elif nV == 2:
 
@@ -1695,14 +1706,24 @@ def main(args=None):
             tmax = t2 + " " + hhend
             
             for z in listadepth:
-    
-                outputname = "CMEMS_" + tmin[0:10] + "_"+ tmax[0:10] + "_" + "numVar["+ str(nV) +"]_" + product_id + "_" + dataset_id +"Depth=" +z +".nc"
 
-                default_values = {'date_min': str(tmin),'date_max': str(tmax),'depth_min': str(z), 'depth_max': str(z),'longitude_max': lon_max,'longitude_min': lon_min,'latitude_min': lat_min,'latitude_max': lat_max,'describe': None, 'auth_mode': 'cas', 'motu': motu_server,'block_size': 65536, 'log_level': 30, 'out_dir': outputdir,'socket_timeout': None,'sync': None,  'proxy_server': proxy_server,'proxy_user': proxy_user,'proxy_pwd': proxy_pass, 'user': cmems_user, 'pwd': cmems_pass,'variable': [v1,v2],'product_id': dataset_id,'service_id': product_id,'user_agent': None,'out_name': outputname, 'outputWritten': 'netcdf','size' : '','console_mode': ''}
-
-                #print (default_values)
-                print(outputname)
+                def truncate(f, n):
+                    return math.floor(f * 10 ** n) / 10 ** n 
                 
+                zformat = truncate(float(z), 2)
+                z1 = zformat
+                z2 = float(zformat) + 0.01
+    
+                outputname1 = "CMEMS_" + tmin[0:10] + "_"+ tmax[0:10] + "_" + "numVar["+ str(nV) +"]_" + product_id + "_" + dataset_id +"-Depth=" +z +".nc"
+                default_values = {'date_min': str(tmin),'date_max': str(tmax),'depth_min': str(z), 'depth_max': str(z),'longitude_max': lon_max,'longitude_min': lon_min,'latitude_min': lat_min,'latitude_max': lat_max,'describe': None, 'auth_mode': 'cas', 'motu': motu_server,'block_size': 65536, 'log_level': 30, 'out_dir': outputdir,'socket_timeout': None,'sync': None,  'proxy_server': proxy_server,'proxy_user': proxy_user,'proxy_pwd': proxy_pass, 'user': cmems_user, 'pwd': cmems_pass,'variable': [v1,v2],'product_id': dataset_id,'service_id': product_id,'user_agent': None,'out_name': outputname1, 'outputWritten': 'netcdf','size' : '','console_mode': ''}
+                #print (default_values)
+                print(outputname1)
+                _opts = load_options(default_values)
+                mt.motu_api.execute_request(_opts)
+
+                outputname2 = "CMEMS_" + tmin[0:10] + "_"+ tmax[0:10] + "_" + "numVar["+ str(nV) +"]_" + product_id + "_" + dataset_id +"-Depth=" +z +".nc"
+                default_values = {'date_min': str(tmin),'date_max': str(tmax),'depth_min': str(z1), 'depth_max': str(z2),'longitude_max': lon_max,'longitude_min': lon_min,'latitude_min': lat_min,'latitude_max': lat_max,'describe': None, 'auth_mode': 'cas', 'motu': motu_server,'block_size': 65536, 'log_level': 30, 'out_dir': outputdir,'socket_timeout': None,'sync': None,  'proxy_server': proxy_server,'proxy_user': proxy_user,'proxy_pwd': proxy_pass, 'user': cmems_user, 'pwd': cmems_pass,'variable': [v1,v2],'product_id': dataset_id,'service_id': product_id,'user_agent': None,'out_name': outputname2, 'outputWritten': 'netcdf','size' : '','console_mode': ''}
+                print(outputname2)
                 _opts = load_options(default_values)
                 mt.motu_api.execute_request(_opts)
 
@@ -1746,19 +1767,32 @@ def main(args=None):
             tmax = t2 + " " + hhend
             
             for z in listadepth:
-    
-                outputname = "CMEMS_" + tmin[0:10] + "_"+ tmax[0:10] + "_" + "numVar["+ str(nV) +"]_" + product_id + "_" + dataset_id +"Depth=" +z +".nc"
 
-                default_values = {'date_min': str(tmin),'date_max': str(tmax),'depth_min': str(z), 'depth_max': str(z),'longitude_max': lon_max,'longitude_min': lon_min,'latitude_min': lat_min,'latitude_max': lat_max,'describe': None, 'auth_mode': 'cas', 'motu': motu_server,'block_size': 65536, 'log_level': 30, 'out_dir': outputdir,'socket_timeout': None,'sync': None,  'proxy_server': proxy_server,'proxy_user': proxy_user,'proxy_pwd': proxy_pass, 'user': cmems_user, 'pwd': cmems_pass,'variable': [v1,v2,v3],'product_id': dataset_id,'service_id': product_id,'user_agent': None,'out_name': outputname, 'outputWritten': 'netcdf','size' : '','console_mode': ''}
-        
-                #print (default_values)
-                print(outputname)
+                def truncate(f, n):
+                    return math.floor(f * 10 ** n) / 10 ** n 
                 
+                zformat = truncate(float(z), 2)
+                z1 = zformat
+                z2 = float(zformat) + 0.01
+    
+                outputname1 = "CMEMS_" + tmin[0:10] + "_"+ tmax[0:10] + "_" + "numVar["+ str(nV) +"]_" + product_id + "_" + dataset_id +"-Depth=" +z +".nc"
+                default_values = {'date_min': str(tmin),'date_max': str(tmax),'depth_min': str(z), 'depth_max': str(z),'longitude_max': lon_max,'longitude_min': lon_min,'latitude_min': lat_min,'latitude_max': lat_max,'describe': None, 'auth_mode': 'cas', 'motu': motu_server,'block_size': 65536, 'log_level': 30, 'out_dir': outputdir,'socket_timeout': None,'sync': None,  'proxy_server': proxy_server,'proxy_user': proxy_user,'proxy_pwd': proxy_pass, 'user': cmems_user, 'pwd': cmems_pass,'variable': [v1,v2,v3],'product_id': dataset_id,'service_id': product_id,'user_agent': None,'out_name': outputname1, 'outputWritten': 'netcdf','size' : '','console_mode': ''}
+                #print (default_values)
+                print(outputname1)
+                _opts = load_options(default_values)
+                mt.motu_api.execute_request(_opts)
+
+                outputname2 = "CMEMS_" + tmin[0:10] + "_"+ tmax[0:10] + "_" + "numVar["+ str(nV) +"]_" + product_id + "_" + dataset_id +"-Depth=" +z +".nc"
+                default_values = {'date_min': str(tmin),'date_max': str(tmax),'depth_min': str(z1), 'depth_max': str(z2),'longitude_max': lon_max,'longitude_min': lon_min,'latitude_min': lat_min,'latitude_max': lat_max,'describe': None, 'auth_mode': 'cas', 'motu': motu_server,'block_size': 65536, 'log_level': 30, 'out_dir': outputdir,'socket_timeout': None,'sync': None,  'proxy_server': proxy_server,'proxy_user': proxy_user,'proxy_pwd': proxy_pass, 'user': cmems_user, 'pwd': cmems_pass,'variable': [v1,v2,v3],'product_id': dataset_id,'service_id': product_id,'user_agent': None,'out_name': outputname2, 'outputWritten': 'netcdf','size' : '','console_mode': ''}
+                print(outputname2)
                 _opts = load_options(default_values)
                 mt.motu_api.execute_request(_opts)
 
         else:
             print("Something went wrong")
+
+
+
     #########################################
     # LOGIC TO GENERATE LINK for DOWNLOAD....
 
@@ -2229,10 +2263,9 @@ def main(args=None):
         print(command)
         os.system(command)
 
-                    
-
     #END FUNCTIONS
     ##########################
+    
     space = Label(tab2, text="")
     space.grid(column=1, row=0)
     ###
