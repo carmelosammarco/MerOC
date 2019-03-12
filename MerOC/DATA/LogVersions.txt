@@ -1,7 +1,0 @@
-Version 0.2.7
-
-- The download depth work just in special condition and then need to be improved
-
-Version 0.2.8
-
-- The Download depth is improved. Now it works with all the CMEMS products but still it is not perfect.
