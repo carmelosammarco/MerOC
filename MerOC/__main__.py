@@ -32,8 +32,7 @@ import cdo
 
 import math
 
-import platform
-
+#import platform
 #######################################
 #if platform.system()=="Linux" or platform.system()=="Windows":
 

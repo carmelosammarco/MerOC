@@ -1,10 +1,10 @@
 from setuptools import setup, find_packages
 
-with open("README.md", "r") as fh:
+with open("README.md", "r", encoding="utf8") as fh:
     long_description = fh.read()
 
 setup(name='MerOC',
-      version='0.2.9',
+      version='0.3.0',
       description='Software to download/manipulate netCDF files',
       long_description=long_description,
       long_description_content_type='text/markdown',
@@ -29,9 +29,11 @@ setup(name='MerOC',
         'motuclient>=1.8.1',
         'csv342>=1.0.0', 
         'pandas>=0.23.4', 
-        'xarray>=0.11.0',  
-        'shapely>=1.6.4.post2', 
-        'fiona>=1.8.4', 
+        'xarray>=0.11.0',
+        #'shapely>=1.6.4.post2', 
+        #'fiona>=1.8.4', 
+        'shapely', 
+        'fiona', 
         'cdo>=1.4.0'
       ],
       
