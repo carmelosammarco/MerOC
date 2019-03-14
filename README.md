@@ -42,7 +42,7 @@ If you work in a Windows environment you must read this guide which will guide y
 
 3) Install the GDAL wheel. I suggest you to don't use GDAL module alongside OSGeo4W or other similar distributions because they could go in conflict and then generate errors and malfuctions. Also add the GDAL library path to the Windows PATH environment variable (which will be something like "C:\pyhon_version\Lib\site-packages\osgeo").To know as add the GDAL path variable  you can check [here](https://www.howtogeek.com/118594how-to-edit-your-system-path-for-easy-command-line-access/). Finally we can now test the GDAL module. Before do that please close and then re-open the command prompt and from whatever path location execute  this command; “gdalinfo --help-general”. If GDAL is configured correctly it will display the usage instructions.
  
-4) pip install the others Python wheels modules downloaded previously (GDAL excluted) from top to bottom list:
+4) Install the others Python wheels modules downloaded previously (GDAL excluted) following the list order:
 
 - click
 - cligj
