@@ -72,7 +72,7 @@ gdalinfo --help-general
  
  If gdal is correctly configured it will display its usage instructions.
  
-4) Install the others Python wheels modules, previously downloaded (gdal excluted), and following the list order(top to bottom):
+4) Install the others Python wheels modules, previously downloaded (gdal excluded), and following the list order (from the top to the bottom):
 
 - click
 - cligj
