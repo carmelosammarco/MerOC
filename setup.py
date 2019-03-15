@@ -32,8 +32,6 @@ setup(name='MerOC',
         'xarray>=0.11.0',
         'shapely>=1.6.4.post2', 
         'fiona>=1.8.4', 
-        #'shapely', 
-        #'fiona', 
         'cdo>=1.4.0'
       ],
       
