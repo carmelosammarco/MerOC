@@ -27,7 +27,13 @@ The dependencies  are listed below:
 
 ## Installation:
 
-To use this software is suggested python ~=3.6. Following the command to install the software:
+To use this software is suggested python ~=3.6. An update of pip, setuptools and wheels is suggested using the following command:
+
+```
+python -m pip install --upgrade pip setuptools wheel
+```
+
+After that run the software installation with:
 
 ```
 pip install MerOC
