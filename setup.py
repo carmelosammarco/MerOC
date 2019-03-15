@@ -4,7 +4,7 @@ with open("README.md", "r", encoding="utf8") as fh:
     long_description = fh.read()
 
 setup(name='MerOC',
-      version='0.3.3',
+      version='0.3.4',
       description='Software to download/manipulate netCDF files',
       long_description=long_description,
       long_description_content_type='text/markdown',
@@ -30,8 +30,8 @@ setup(name='MerOC',
         'csv342>=1.0.0', 
         'pandas>=0.23.4', 
         'xarray>=0.11.0',
-        'shapely>=1.6.4.post2', 
-        'fiona>=1.8.4', 
+        'shapely==1.6.4.post1', 
+        'fiona==1.8.4', 
         'cdo>=1.4.0'
       ],
       
