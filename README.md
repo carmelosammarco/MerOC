@@ -27,13 +27,13 @@ The dependencies  are listed below:
 
 ## Installation for Unix users (Linux distros and Mac-OSX systems):
 
-As fist thing please consider to install [Anaconda](https://www.anaconda.com) 3.* version (Be aware that to use this software is suggested python ~=3.6). Once the bash file (.sh) is downloaded, you can execute it in the terminal using the following command:
+As first thing please consider to install [Anaconda](https://www.anaconda.com) 3.* version (Be aware that to use this software is suggested python ~=3.6). Once the bash file (.sh) is downloaded, you can execute it in the terminal using the following command:
 
 ```
 bash file_installation_Anaconda_downloaded.sh
 ```
 
- Furthermore, an update of pip, setuptools and wheels is suggested. You can do it executing the following command:
+Furthermore, an update of pip, setuptools and wheels is suggested. You can do it executing the following command:
 
 ```
 python -m pip install --upgrade pip setuptools wheel
@@ -45,12 +45,12 @@ After that run the software installation with:
 pip install MerOC
 ```
 
-When the installation is concluded, just type in the terminal "MerOC",press the enter key and the application will pop up.
+When the installation is concluded, just type in the terminal "MerOC", press the enter key and the application will pop up.
 
 
 ## Installation for Windows users:
 
-As fist thing please consider to install [Anaconda](https://www.anaconda.com) 3.* version (Be aware that to use this software is suggested python ~=3.6). The file from you downloaded will be a stardard executable (.exe). Before run the installation please be sure to tick the option to add in the Windows PATH environment variable the path of the anaconda package. 
+As first thing please consider to install [Anaconda](https://www.anaconda.com) 3.* version (Be aware that to use this software is suggested python ~=3.6). The file from you downloaded will be a stardard executable (.exe). Before run the installation please be sure to tick the option for add in the Windows PATH environment variable the path of the anaconda package. 
 
 Furthermore, an update of pip, setuptools and wheels is suggested. You can do it executing the following command:
 
@@ -58,25 +58,25 @@ Furthermore, an update of pip, setuptools and wheels is suggested. You can do it
 python -m pip install --upgrade pip setuptools wheel
 ```
 
-Before start with the software installlation it is mandatory to manually configure and install few python modules that are not correctly managed. The final aim is be able to install “shapely” and “fiona”. They are essential Python tools for geospatial operations (exporting a netCDF variable as shapefile just to cite one). In this particular scenario It is particular usefull install the required modules using the Python wheels when possible, because they are pre-compiled and then easily digested from the Windows OS. Christoph Gohlke, at the Laboratory for Fluorescence Dynamics at UC Irvine, maintains a large [Python wheels library](https://www.lfd.uci.edu/~gohlke/pythonlibs/). Be aware that for each module you need to choose the one maching your Python version and the pc processor characteristics (32 or 64-bit). If we consider as example "Shapely-1.6.4.post1-cp37-cp37m-win32.whl" the "cp37" indicate the python version which is 3.7.* while "win32" the processor type which is 32-bit. The python version can be indicated also as "py3" or "py2" or "py2.py3". the latter when both the 2.* and 3.* python version can be used. To install a wheel file you just need to run "pip install [wheel_file]"  in the same location where the wheel is located. To succeed with the installation of "shapely" and "fiona" you must execute the following steps, in the same order as they are listed below:
+Before start with the software installation it is mandatory to manually configure and install few python dependencies that are not correctly managed by the stardard 'pip' Windows command installation. The dependencies that I am speaking of are “shapely” and “fiona”. They are essential Python modules for geospatial operations which are contained in this python software (exporting a netCDF variable as shapefile just to cite an example). In this particular scenario, and especially in a Windows OS, be able to install the required modules using the Python wheels can be very handy. In fact they are already pre-compiled and then easily digested from the Windows OS. Christoph Gohlke, at the Laboratory for Fluorescence Dynamics at UC Irvine, maintains a large [Python wheels library](https://www.lfd.uci.edu/~gohlke/pythonlibs/). Be aware that for each module you need to choose the one maching your Python version and the pc processor characteristics (32 or 64-bit). If we consider as example "Shapely-1.6.4.post1-cp37-cp37m-win32.whl" the "cp37" indicate the python version which is 3.7.* while "win32" the processor type which is 32-bit. The python version can be indicated also as "py3" or "py2" or "py2.py3". the latter when both the 2.* and 3.* python version can be used. To install a wheel file you just need to run "pip install [wheel_file]"  in the same location where the wheel is located. To succeed within the installation of "shapely" and "fiona" you must execute the following steps, in the same order as they are listed below:
 
-1) Install [Visual studio C++](https://www.microsoft.com/en-us/download/details.aspx?id=48145).
+1. Install [Visual studio C++](https://www.microsoft.com/en-us/download/details.aspx?id=48145).
  
-2) Download [gdal](https://www.lfd.uci.edu/~gohlke/pythonlibs/#gdal), [click](https://www.lfd.uci.edu/~gohlke/pythonlibs/#click), [cligj](https://www.lfd.uci.edu/~gohlke/pythonlibs/#cligj), [click_plugin](https://www.lfd.uci.edu/~gohlke/pythonlibs/#click), [attrs](https://www.lfd.uci.edu/~gohlke/pythonlibs/#attrs), [munch](https://www.lfd.uci.edu/~gohlke/pythonlibs/#munch), [fiona](https://www.lfd.uci.edu/~gohlke/pythonlibs/#fiona), [pyproj](https://www.lfd.uci.edu/~gohlke/pythonlibs/#pyproj), [rtree](https://www.lfd.uci.edu/~gohlke/pythonlibs/#rtree) and [shapely](https://www.lfd.uci.edu/~gohlke/pythonlibs/#shapely) from the [Python wheels library](https://www.lfd.uci.edu/~gohlke/pythonlibs/). Now you have everything you need for the following steps.
+2. Download [gdal](https://www.lfd.uci.edu/~gohlke/pythonlibs/#gdal), [click](https://www.lfd.uci.edu/~gohlke/pythonlibs/#click), [cligj](https://www.lfd.uci.edu/~gohlke/pythonlibs/#cligj), [click_plugin](https://www.lfd.uci.edu/~gohlke/pythonlibs/#click), [attrs](https://www.lfd.uci.edu/~gohlke/pythonlibs/#attrs), [munch](https://www.lfd.uci.edu/~gohlke/pythonlibs/#munch), [fiona](https://www.lfd.uci.edu/~gohlke/pythonlibs/#fiona), [pyproj](https://www.lfd.uci.edu/~gohlke/pythonlibs/#pyproj), [rtree](https://www.lfd.uci.edu/~gohlke/pythonlibs/#rtree) and [shapely](https://www.lfd.uci.edu/~gohlke/pythonlibs/#shapely) from the [Python wheels library](https://www.lfd.uci.edu/~gohlke/pythonlibs/). Now you have what you need for the following steps.
 
-3) Install the gdal wheel. I suggest you to don't use gdal module alongside OSGeo4W or other similar distributions because they could go in conflict and then generate errors and malfuctions. Also add the gdal library path to the Windows PATH environment variable (which will be something like "C:\pyhon_version\Lib\site-packages\osgeo").To know in which way add the gdal path variable  you can check [here](https://www.howtogeek.com/118594/how-to-edit-your-system-path-for-easy-command-line-access/). Finally we can now test the gdal module. Before do that please to close and then re-open the command prompt and from whatever path location execute this command:
+3. Install the gdal wheel. I suggest you to don't use gdal module alongside OSGeo4W or other similar distributions because they could go in conflict and then generate errors and malfuctions. Also add the gdal library path to the Windows PATH environment variable (which will be something like "C:\pyhon_version\Lib\site-packages\osgeo").To know in which way add the gdal path variable  you can check [here](https://www.howtogeek.com/118594/how-to-edit-your-system-path-for-easy-command-line-access/). Finally we can now test the gdal module. Before do that please to close and then re-open the command prompt and from whatever path location execute this command:
 
 ```
 gdalinfo --help-general
 ```
  
- If gdal is correctly configured it will display its usage instructions.
+If gdal is correctly configured it will display its usage instructions.
  
-4) Install the others Python wheels modules, previously downloaded (gdal excluded), and following the list order (from the top to the bottom):
+4. Install the others Python wheels modules, previously downloaded (gdal excluded), and following the list order (from the top to the bottom):
 
 - click
 - cligj
-- click plugin
+- click_plugin
 - attrs
 - munch
 - fiona
@@ -87,10 +87,9 @@ gdalinfo --help-general
 Now that the all the most nasty dependencies are installed (at least for Windows OS), you can execute:
 
 ```
-pip install MerOC
+pip install tool4nc
 ```
-When the installation is concluded, just type in the terminal "MerOC",press the enter key and the application will pop up.
-
+When the installation is concluded, just type in the terminal "MerOC", press the enter key and the application will pop up.
 
 ## Functionalities:
 
