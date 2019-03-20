@@ -11,8 +11,6 @@ before_install:
   - chmod +x Anaconda.sh
   - ./Anaconda.sh -b
   - export PATH=/home/travis/anaconda/bin:$PATH
-  # Update conda itself
-  - conda update --yes conda
   
 # Install packages
 install:
