@@ -3,7 +3,6 @@
 language: python
 python:
   - "3.6"
-  - "3.7"
 
 # Setup Anaconda
 before_install:
@@ -14,8 +13,6 @@ before_install:
   
 # Install packages
 install:
-  - conda create --yes -n env_name python=$TRAVIS_PYTHON_VERSION pip numpy matplotlib nose
-  - source activate env_name
   - python -m pip install --upgrade pip setuptools wheel 
   - pip install MerOC
 
