@@ -1,2 +1,2 @@
 
-pip freeze | grep "MerOC"
+pip freeze | grep MerOC
