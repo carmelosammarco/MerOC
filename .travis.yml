@@ -17,6 +17,6 @@ install:
   - pip install MerOC
 
 # Run test
-#script:
-  #- python Test.py
+script:
+  - python Test.py
   
