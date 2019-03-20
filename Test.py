@@ -1,3 +1,2 @@
-import os
 
-os.system("MerOC")
+pip freeze | grep "MerOC"
