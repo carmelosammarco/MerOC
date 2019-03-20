@@ -1,2 +1,4 @@
+import os
 
-pip list | grep MerOC
+
+os.system("pip list | grep MerOC")
