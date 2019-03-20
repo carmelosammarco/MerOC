@@ -1,5 +1,8 @@
 # MerOC
 
+[Build Status](https://travis-ci.org/carmelosammarco/MerOC)
+
+
 Python software containing functions for simplifying the netCDF files download and manipulations. The registration to the CMEMS web portal (by Copernicus) is required to be able to use the download services (TAB1:netCDF-Download). The other tools (TAB2:netCDF-Manipulations) can be used without any registration.
 
 ![Imgur](https://i.imgur.com/oDEhCIX.png?raw=true)
