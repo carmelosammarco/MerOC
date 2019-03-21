@@ -1,4 +1,5 @@
-# MerOC
+![Imgur](https://i.imgur.com/RBBhtxw.gif?1)
+# MerOC    
  
 **Travis CI:**
 
