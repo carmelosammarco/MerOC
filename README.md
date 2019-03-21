@@ -119,7 +119,7 @@ I can summarise the workflow of the "TAB 1: netCDF-Download" as the following:
 
 **3) Download the data**
 
-To satisfy the first or second point we can proceed mainly in two way which are listed below:
+To satisfy both the first and second workflow's points we can proceed in two way listed below:
 
 - Fill the empty boxes which are the CMEMS login credentials (highlighted in red) and motuclient parameters (highlighted in blue). Be aware that you can request a maximum of tree variables (if less just leave the others variable fields empty). For the output directory you need to select the folder from the window that pop up once you click on “Out-DIR”. Finally you chan generate the motuclient script using “Link-NRT” or “Link-MY” for a near-real-time or multi-year product respectively. 
 
