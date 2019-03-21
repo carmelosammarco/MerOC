@@ -1,4 +1,4 @@
-![Imgur](https://i.imgur.com/RBBhtxw.gif?1)
+![Imgur](https://i.imgur.com/iEWAtkS.gif?1)
 # MerOC    
  
 **Travis CI:**
@@ -109,7 +109,7 @@ Below I am going to display a more detailed image of the "TAB 1: netCDF-Download
 
 ![Imgur](https://i.imgur.com/hV6QBiW.png?2)
 
-![Imgur](https://i.imgur.com/jx7rTnY.png?1)
+![Imgur](https://i.imgur.com/DJyKn3j.png?1)
 
 I can summarise the workflow of the "TAB 1: netCDF-Download" as the following:
 
