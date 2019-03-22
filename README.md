@@ -115,14 +115,17 @@ Below I am going to display a more detailed image of the "TAB 1: netCDF-Download
 I can summarise the workflow of the "TAB 1: netCDF-Download" as the following:
 
 **1) Filling the form with all the parameters required**
-- Usename
-- Password
-- Product
-- Dataset
-- Long min/max
-- Lat  min/max
-- Depth min/max (if present)
-- Date start/end (From "date start" at "hh:mm:ss" To "date end" at "hh:mm:ss")
+- **CMEMS Usename**
+- **CMEMS Password**
+- **Product :** name of the product 
+- **Dataset :** name of the dataset 
+- **Long min/max :** Longitude min and max
+- **Lat  min/max :** Latidude min and max
+- **Depth min/max :** Depth min and max (if it is avaiable)
+- **Date start/end :** Defined by dates and time  (**From** [date_start] at [hh:mm:ss] **To** [date end] **at** [hh:mm:ss])
+- **Variable-1,2,3 :** Max three variables are allowed. If you want use less just leave the cell empty.
+- **File name :** It needs to be typed also if just used by the single file download method)
+- **Out-Dir :** output directory where we want to save the data
 
 **2) Generation of the motuclient script**
 
