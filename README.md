@@ -1,7 +1,7 @@
 ![Imgur](https://i.imgur.com/iEWAtkS.gif?1)
 # MerOC    
  
-[![Build Status](https://travis-ci.com/carmelosammarco/MerOC.png)](https://travis-ci.com/carmelosammarco/MerOC) [![Build status](https://ci.appveyor.com/api/projects/status/qqy9y9iu1a473qk4?svg=true)](https://ci.appveyor.com/project/carmelosammarco/meroc) [![Gitter](https://badges.gitter.im/MerOC/community.svg)](https://gitter.im/MerOC/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![Build Status](https://travis-ci.com/carmelosammarco/MerOC.png)](https://travis-ci.com/carmelosammarco/MerOC) [![Build status](https://ci.appveyor.com/api/projects/status/qqy9y9iu1a473qk4?svg=true)](https://ci.appveyor.com/project/carmelosammarco/meroc) [![PyPi](https://img.shields.io/badge/PyPi-Project-yellow.svg](https://pypi.org/project/MerOC/) [![Gitter](https://badges.gitter.im/MerOC/community.svg)](https://gitter.im/MerOC/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 Python software containing functions for simplifying the netCDF files download and manipulations. The registration to the [CMEMS web portal](http://marine.copernicus.eu) (by Copernicus) is required to be able to use the download services (TAB1:netCDF-Download). The other tools (TAB2:netCDF-Manipulations) can be used without any registration.
 
