@@ -138,7 +138,7 @@ To satisfy both the first and second workflow's points we can proceed in two way
 
 ### TAB 2: netCDF-Manipulation 
 
-This tab is able to convert the netCDF files in different formats (CSV, GRID and shape files), concatenate segments of data coming from the same dataset but at different time steps and split the data in function of the time. It is possible split the data by day(DD), months(YYYYMM) and years(YYYY) with the additional option of addiing a suffix to the data generated. More details about the functions included in  this tab are displayed in a separate published python module named [tool4nc](https://pypi.org/project/tool4nc/) which bring in a easy coding form all the manipulation functionalities.
+This tab is able to convert the netCDF files in different formats (CSV, GRID and shape files), concatenate segments of data coming from the same dataset but at different time steps and split the data in function of the time. It is possible split the data by day(DD), months(YYYYMM) and years(YYYY) with the additional option of addiing a suffix to the data generated. More details about the functions included in  this tab are displayed in a separate published python module named [tool4nc](https://github.com/carmelosammarco/tool4nc) which bring in a easy coding form all the manipulation functionalities.
 
 
 
