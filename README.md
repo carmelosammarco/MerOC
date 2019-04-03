@@ -30,7 +30,13 @@ The dependencies  are listed below:
 
 ## Installation for Unix users (Linux distros and Mac-OSX systems):
 
-As first thing please consider to install [Anaconda](https://www.anaconda.com) 3.* version (Be aware that to use this software is suggested python ~=3.6). Once the bash file (.sh) is downloaded, you can execute it in the terminal using the following command:
+As first things please install [cdo](https://code.mpimet.mpg.de/projects/cdo). It is required to run few functions inside the "TAB2:netCDF-Manipulations". You can use the following command:
+
+```
+sudo apt-get install cdo
+```
+
+Also please consider to install [Anaconda](https://www.anaconda.com) 3.* version (Be aware that to use this software is suggested python ~=3.6). Once the bash file (.sh) is downloaded, you can execute it in the terminal using the following command:
 
 ```
 bash file_installation_Anaconda_downloaded.sh
@@ -53,7 +59,9 @@ When the installation is concluded, just type in the terminal "MerOC", press the
 
 ## Installation for Windows users:
 
-As first thing please consider to install [Anaconda](https://www.anaconda.com) 3.* version (Be aware that to use this software is suggested python ~=3.6). The file from you downloaded will be a stardard executable (.exe). Before run the installation please be sure to tick the option for add in the Windows PATH environment variable the path of the anaconda package. 
+As first things please install [cdo - climate data operator](https://code.mpimet.mpg.de/projects/cdo). It is required to run few functions inside the "TAB2:netCDF-Manipulations". From the product web page you can download the version which satisfy your system characteristics. Once de-compressed the folder downloaded just run the .exe file to install cdo in your Windows OS system.
+
+Also please consider to install [Anaconda](https://www.anaconda.com) 3.* version (Be aware that to use this software is suggested python ~=3.6). The file from you downloaded will be a stardard executable (.exe). Before run the installation please be sure to tick the option for add in the Windows PATH environment variable the path of the anaconda package. 
 
 Furthermore, an update of pip, setuptools and wheels is suggested. You can do it executing the following command:
 
@@ -90,7 +98,7 @@ If gdal is correctly configured it will display its usage instructions.
 Now that the all the most nasty dependencies are installed (at least for Windows OS), you can execute:
 
 ```
-pip install tool4nc
+pip install MerOC
 ```
 
 When the installation is concluded, just type in the terminal "MerOC",press the enter key and the application will pop up.
