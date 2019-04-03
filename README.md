@@ -30,7 +30,7 @@ The dependencies  are listed below:
 
 ## Installation for Unix users (Linux distros and Mac-OSX systems):
 
-As first things please install [cdo](https://code.mpimet.mpg.de/projects/cdo). It is required to run few functions inside the "TAB2:netCDF-Manipulations". You can use the following command:
+As first things please install [cdo - climate data operator](https://code.mpimet.mpg.de/projects/cdo). It is required to run few functions inside the "TAB2:netCDF-Manipulations". You can use the following command:
 
 ```
 sudo apt-get install cdo
