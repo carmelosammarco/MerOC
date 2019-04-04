@@ -3,7 +3,15 @@
  
 [![Build Status](https://travis-ci.com/carmelosammarco/MerOC.png)](https://travis-ci.com/carmelosammarco/MerOC) [![Build status](https://ci.appveyor.com/api/projects/status/qqy9y9iu1a473qk4?svg=true)](https://ci.appveyor.com/project/carmelosammarco/meroc) [![PyPi](https://img.shields.io/badge/PyPi-Project-yellow.svg)](https://pypi.org/project/MerOC/) [![Gitter](https://badges.gitter.im/MerOC/community.svg)](https://gitter.im/MerOC/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-This software developed in my mind while working as consultant engeneer in the **CMEMS's Service Desk (Copernicus Marine Environment Monitoring Service)**. I was and I am inspired by the Mercator-Ocean's community ( users, co-workers, web-forum and many more) which gaves me ideas and the motivational power to make this tool a reality. This is the first tool created of its kind inside the CMEMS environment and I hope that with time it will became an ufficial CMEMS resource. This project gave me also ideas to develop other tools as [tool4nc](https://github.com/carmelosammarco/tool4nc) and [MerOCenv](https://github.com/carmelosammarco/MerOCenv) and you can find more informations about them in their respective web-pages.  
+This software developed in my mind while working as consultant engeneer in the **CMEMS's Service Desk (Copernicus Marine Environment Monitoring Service)**. I was and I am inspired by the Mercator-Ocean's community ( users, co-workers, web-forum and many more) which gaves me ideas and the motivational power to make this tool a reality. This is the first tool created of its kind inside the CMEMS environment and I hope that with time it will became an ufficial CMEMS resource. The main goals that I wanted to hit were adressing the most common user problems as the data-download and the netCDF file manipulations.
+
+This project gave me also ideas to develop other tools as [tool4nc](https://github.com/carmelosammarco/tool4nc) and [MerOCenv](https://github.com/carmelosammarco/MerOCenv) and you can find more informations about them in their respective web-pages. 
+
+I created also a chat-community powered by "Gitter" where is possible have an exchange of ideas,functionalities,bugs and many more. Just click ![Gitter](https://badges.gitter.im/MerOC/community.svg) to acces the chat room.
+
+Many thanks to visit this page and try this software.
+
+Carmelo Sammarco
 
 ## Introduction:
 
