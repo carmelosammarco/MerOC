@@ -3,6 +3,10 @@
  
 [![Build Status](https://travis-ci.com/carmelosammarco/MerOC.png)](https://travis-ci.com/carmelosammarco/MerOC) [![Build status](https://ci.appveyor.com/api/projects/status/qqy9y9iu1a473qk4?svg=true)](https://ci.appveyor.com/project/carmelosammarco/meroc) [![PyPi](https://img.shields.io/badge/PyPi-Project-yellow.svg)](https://pypi.org/project/MerOC/) [![Gitter](https://badges.gitter.im/MerOC/community.svg)](https://gitter.im/MerOC/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
+This software developed in my mind while working as consultant engeneer in the **CMEMS's Service Desk (Copernicus Marine Environment Monitoring Service)**. I was and I am inspired by the Mercator-Ocean's community ( users, co-workers, web-forum and many more) which gaves me ideas and the motivational power to make this tool a reality. This is the first tool created of its kind inside the CMEMS environment and I hope that with time it will became an ufficial CMEMS resource. This project gave me also ideas to develop other tools as [tool4nc](https://github.com/carmelosammarco/tool4nc) and [MerOCenv](https://github.com/carmelosammarco/MerOCenv) and you can find more informations about them in their respective web-pages.  
+
+## Introduction:
+
 Python software containing functions for simplifying the netCDF files download and manipulations. The registration to the [CMEMS web portal](http://marine.copernicus.eu) (by Copernicus) is required to be able to use the download services (TAB1:netCDF-Download). The other tools (TAB2:netCDF-Manipulations) can be used without any registration.
 
 ![Imgur](https://i.imgur.com/oDEhCIX.png?raw=true)
@@ -30,7 +34,7 @@ The dependencies  are listed below:
 
 ## Installation for Unix users (Linux distros and Mac-OSX systems):
 
-As first things please install [cdo - climate data operator](https://code.mpimet.mpg.de/projects/cdo). It is required to run few functions inside the "TAB2:netCDF-Manipulations". You can use the following command:
+If interested to have a fully use of the "TAB2:netCDF-Manipulations" please install the [cdo - climate data operator](https://code.mpimet.mpg.de/projects/cdo). In fact it is required to run few functions in the above mentioned tab. To do that you can use the following command:
 
 ```
 sudo apt-get install cdo
@@ -54,7 +58,7 @@ After that run the software installation with:
 pip install MerOC
 ```
 
-When the installation is concluded, just type in the terminal "MerOC", press the enter key and the application will pop up.
+When the installation is concluded, just type in the terminal "MerOC",press the enter key and the application will pop up.
 
 
 ## Installation for Windows users:
