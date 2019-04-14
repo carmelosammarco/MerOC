@@ -56,6 +56,15 @@ def main(args=None):
 
     window.title("MerOC-by-CSammarco")
 
+    #progbar1 = ttk.Progressbar(tab1, orient='horizontal', length=150, mode='indeterminate', value=1)
+    #space1 = Label(tab1, text="In progress:")
+    #space1.grid(column=0, row=38)
+    #progbar1.grid(column=0, row=39)
+    
+    
+    
+    
+
     #################
     #TAB 1 
     #Functions
@@ -248,7 +257,7 @@ def main(args=None):
                         mt.motu_api.execute_request(_opts)
 
                         if not line: 
-                            break 
+                            break   
              
 
         elif dV == 1 and nV == 1:
@@ -356,8 +365,6 @@ def main(args=None):
 
                         if not line:
                             break
-                
-
 
 
         elif dV == 0 and nV == 2:
@@ -2005,149 +2012,173 @@ def main(args=None):
     Pwd1 = Entry(tab1, width=13, show="*")
     Pwd1.grid(column=1, row=1)
     ##
+    space1 = Label(tab1, text="")
+    space1.grid(column=0, row=2)
+    space1 = Label(tab1, text="")
+    space1.grid(column=1, row=2)
+    ##
     Product1 = Label(tab1, text="Product")
-    Product1.grid(column=0, row=2)
+    Product1.grid(column=0, row=3)
     Pd1 = Entry(tab1, width=13)
-    Pd1.grid(column=0, row=3)
+    Pd1.grid(column=0, row=4)
     ##
     Dataset1 = Label(tab1, text="Dataset")
-    Dataset1.grid(column=1, row=2)
+    Dataset1.grid(column=1, row=3)
     Ds1 = Entry(tab1, width=13)
-    Ds1.grid(column=1, row=3)
+    Ds1.grid(column=1, row=4)
     ##
     space1 = Label(tab1, text="")
-    space1.grid(column=0, row=4)
+    space1.grid(column=0, row=5)
+    space1 = Label(tab1, text="")
+    space1.grid(column=1, row=5)
     ##
     longmin1 = Label(tab1, text="Long min")
-    longmin1.grid(column=0, row=5)
+    longmin1.grid(column=0, row=6)
     lomin1 = Entry(tab1, width=13)
-    lomin1.grid(column=0, row=6)
+    lomin1.grid(column=0, row=7)
     ##
     longmax1 = Label(tab1, text="Long max")
-    longmax1.grid(column=1, row=5)
+    longmax1.grid(column=1, row=6)
     lomax1 = Entry(tab1, width=13)
-    lomax1.grid(column=1, row=6)
+    lomax1.grid(column=1, row=7)
     ##
     latmin1 = Label(tab1, text="Lat min")
-    latmin1.grid(column=0, row=7)
+    latmin1.grid(column=0, row=8)
     lamin1 = Entry(tab1, width=13)
-    lamin1.grid(column=0, row=8)
+    lamin1.grid(column=0, row=9)
     ##
     latmax1 = Label(tab1, text="Lat max")
-    latmax1.grid(column=1, row=7)
+    latmax1.grid(column=1, row=8)
     lamax1 = Entry(tab1, width=13)
-    lamax1.grid(column=1, row=8)
+    lamax1.grid(column=1, row=9)
+    ##
+    space1 = Label(tab1, text="")
+    space1.grid(column=0, row=10)
+    space1 = Label(tab1, text="")
+    space1.grid(column=1, row=10)
     ##
     depthmin1 = Label(tab1, text="Depth min")
-    depthmin1.grid(column=0, row=9)
+    depthmin1.grid(column=0, row=11)
     dmin1 = Entry(tab1, width=13)
-    dmin1.grid(column=0, row=10)
+    dmin1.grid(column=0, row=12)
     ##
     depthmax1 = Label(tab1, text="Depth max")
-    depthmax1.grid(column=1, row=9)
+    depthmax1.grid(column=1, row=11)
     dmax1 = Entry(tab1, width=13)
-    dmax1.grid(column=1, row=10)
+    dmax1.grid(column=1, row=12)
     ##
     space1 = Label(tab1, text=" ")
-    space1.grid(column=0, row=11)
+    space1.grid(column=0, row=13)
+    space1 = Label(tab1, text="")
+    space1.grid(column=1, row=13)
     ##
-    stardate1 = Label(tab1, text="From [YYYY-MM-DD]")
-    stardate1.grid(column=0, row=12)
+    stardate1 = Label(tab1, text="From date: YYYY-MM-DD")
+    stardate1.grid(column=0, row=14)
     sd1 = Entry(tab1, width=13)
-    sd1.grid(column=0, row=13)
+    sd1.grid(column=0, row=15)
     ##
-    hourdate1 = Label(tab1, text="At [HH:MM:SS]")
-    hourdate1.grid(column=1, row=12)
-    hhstartentry = Entry(tab1, width=13)
-    hhstartentry.grid(column=1, row=13)
-    ##
-    #format_date1 = Label(tab1, text='["yyyy-mm-dd 00:00:00"]')
-    #format_date1.grid(column=0, row=11)
-    ##
-    space1 = Label(tab1, text="")
-    space1.grid(column=0, row=14)
-    ##
-    enddate1 = Label(tab1, text="To [YYYY-MM-DD]")
-    enddate1.grid(column=0, row=15)
+    enddate1 = Label(tab1, text="To date: YYYY-MM-DD")
+    enddate1.grid(column=1, row=14)
     ed1 = Entry(tab1, width=13)
-    ed1.grid(column=0, row=16)
-    ##
-    houredate1 = Label(tab1, text="At [HH:MM:SS]")
-    houredate1.grid(column=1, row=15)
-    hhendentry = Entry(tab1, width=13)
-    hhendentry.grid(column=1, row=16)
+    ed1.grid(column=1, row=15)
     ##
     space1 = Label(tab1, text="")
-    space1.grid(column=0, row=17)
+    space1.grid(column=0, row=16)
+    space1 = Label(tab1, text="")
+    space1.grid(column=1, row=16)
     ##
-    Variable1 = Label(tab1, text="Variable-1")
-    Variable1.grid(column=0, row=18)
+    hourdate1 = Label(tab1, text="From time: HH:MM:SS")
+    hourdate1.grid(column=0, row=17)
+    hhstartentry = Entry(tab1, width=13)
+    hhstartentry.grid(column=0, row=18)
+    ##
+    houredate1 = Label(tab1, text="To time: HH:MM:SS")
+    houredate1.grid(column=1, row=17)
+    hhendentry = Entry(tab1, width=13)
+    hhendentry.grid(column=1, row=18)
     ##
     space1 = Label(tab1, text="")
     space1.grid(column=0, row=19)
+    space1 = Label(tab1, text="")
+    space1.grid(column=1, row=19)
     ##
-    Variable2 = Label(tab1, text="Variable-2")
-    Variable2.grid(column=0, row=20)
+    Variable1 = Label(tab1, text="Variable-1")
+    Variable1.grid(column=0, row=20)
     ##
     space1 = Label(tab1, text="")
     space1.grid(column=0, row=21)
     ##
-    Variable3 = Label(tab1, text="Variable-3")
-    Variable3.grid(column=0, row=22)
+    Variable2 = Label(tab1, text="Variable-2")
+    Variable2.grid(column=0, row=22)
     ##
     space1 = Label(tab1, text="")
     space1.grid(column=0, row=23)
-
     ##
-    V11 = Entry(tab1, width=13)
-    V11.grid(column=1, row=18)
-
-    V12 = Entry(tab1, width=13)
-    V12.grid(column=1, row=20)
-
-    V13 = Entry(tab1, width=13)
-    V13.grid(column=1, row=22)
-    ##
-    space1 = Label(tab1, text="")
-    space1.grid(column=1, row=23)
-    ##
-    filename1 = Label(tab1, text="File name")
-    filename1.grid(column=0, row=24)
-    fname1 = Entry(tab1, width=13)
-    fname1.grid(column=1, row=24)
+    Variable3 = Label(tab1, text="Variable-3")
+    Variable3.grid(column=0, row=24)
     ##
     space1 = Label(tab1, text="")
     space1.grid(column=0, row=25)
+
+    ##
+    V11 = Entry(tab1, width=13)
+    V11.grid(column=1, row=20)
+
+    V12 = Entry(tab1, width=13)
+    V12.grid(column=1, row=22)
+
+    V13 = Entry(tab1, width=13)
+    V13.grid(column=1, row=24)
     ##
     space1 = Label(tab1, text="")
-    space1.grid(column=0, row=26)
+    space1.grid(column=1, row=25)
+    space1 = Label(tab1, text="")
+    space1.grid(column=0, row=25)
+    ##
+    filename1 = Label(tab1, text="File name")
+    filename1.grid(column=0, row=26)
+    fname1 = Entry(tab1, width=13)
+    fname1.grid(column=1, row=26)
+    ##
+    space1 = Label(tab1, text="")
+    space1.grid(column=0, row=27)
+    space1 = Label(tab1, text="")
+    space1.grid(column=1, row=27)
+    ##
+    space1 = Label(tab1, text="")
+    space1.grid(column=0, row=28)
+    space1 = Label(tab1, text="")
+    space1.grid(column=1, row=28)
     #
     btn1 = Button(tab1, text="Link-NRT", bg="green", command=gennrt)
-    btn1.grid(column=1, row=27)
+    btn1.grid(column=1, row=29)
     ##
     btn1 = Button(tab1, text="Link-MY", bg="green", command=genmuy)
-    btn1.grid(column=1, row=28)
-    ##
-    txt1 = scrolledtext.ScrolledText(tab1,width=45,height=10)
-    txt1.grid(column=1,row=29)
-    ##
-    Out1 = Button(tab1, text="Out-DIR", bg="yellow", command=Outputmotuclient1)
-    Out1.grid(column=0, row=29)
-    ##
-    btn1 = Button(tab1, text="Clean-link", bg="white", command=genclean1)
     btn1.grid(column=1, row=30)
     ##
+    txt1 = scrolledtext.ScrolledText(tab1,width=45,height=10)
+    txt1.grid(column=1,row=31)
+    ##
+    Out1 = Button(tab1, text="Out-DIR", bg="yellow", command=Outputmotuclient1)
+    Out1.grid(column=0, row=31)
+    ##
+    btn1 = Button(tab1, text="Clean-link", bg="white", command=genclean1)
+    btn1.grid(column=1, row=32)
+    ##
     btn1 = Button(tab1, text="Download as single file", bg="red", command=downloadmotu1)
-    btn1.grid(column=0, row=31)
+    btn1.grid(column=0, row=33)
     ##
     btn1 = Button(tab1, text="Download as monthly files", bg="red", command=downloadmotumontly1)
-    btn1.grid(column=0, row=32)
+    btn1.grid(column=0, row=34)
     ###
     btn1 = Button(tab1, text="Download as daily files", bg="red", command=downloaddaily)
-    btn1.grid(column=0, row=33)
+    btn1.grid(column=0, row=35)
     ###
     btn1 = Button(tab1, text="Download by depths", bg="red", command=downloadbydepth1)
-    btn1.grid(column=0, row=34)
+    btn1.grid(column=0, row=36)
+    ###
+    space1 = Label(tab1, text="")
+    space1.grid(column=0, row=37)
     
     #hhmmssentrystart = hhstartentry.get()
     #hhmmssentrystart.grid(column=0, row=37)
