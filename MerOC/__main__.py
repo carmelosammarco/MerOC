@@ -61,10 +61,6 @@ def main(args=None):
     #space1.grid(column=0, row=38)
     #progbar1.grid(column=0, row=39)
     
-    
-    
-    
-
     #################
     #TAB 1 
     #Functions
@@ -2390,8 +2386,6 @@ def main(args=None):
 
     #space = Label(tab2, text="")
     #space.grid(column=0, row=16)
-
-    
 
     #################################################################
 
