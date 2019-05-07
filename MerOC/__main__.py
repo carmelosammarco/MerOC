@@ -1652,15 +1652,14 @@ def main(args=None):
                 zformat = truncate(float(z), 2)
                 z1 = zformat
                 z2 = float(zformat) + 0.01
-
-                
+    
                 outputname1 = "CMEMS_" + tmin[0:10] + "_"+ tmax[0:10] + "_" + "numVar["+ str(nV) +"]_" + product_id + "_" + dataset_id +"-Depth=" +z +".nc"
                 default_values = {'date_min': str(tmin),'date_max': str(tmax),'depth_min': str(z), 'depth_max': str(z),'longitude_max': lon_max,'longitude_min': lon_min,'latitude_min': lat_min,'latitude_max': lat_max,'describe': None, 'auth_mode': 'cas', 'motu': motu_server,'block_size': 65536, 'log_level': 30, 'out_dir': outputdir,'socket_timeout': None,'sync': None,  'proxy_server': proxy_server,'proxy_user': proxy_user,'proxy_pwd': proxy_pass, 'user': cmems_user, 'pwd': cmems_pass,'variable': [v1],'product_id': dataset_id,'service_id': product_id,'user_agent': None,'out_name': outputname1, 'outputWritten': 'netcdf','size' : '','console_mode': ''}
                 #print (default_values)
                 print(outputname1)
                 _opts = load_options(default_values)
                 mt.motu_api.execute_request(_opts)
-                
+
                 exsist = os.path.isfile(outputdir + "/" + outputname1 )
 
                 if exsist:
@@ -1675,7 +1674,6 @@ def main(args=None):
                     mt.motu_api.execute_request(_opts)
                     print ("---The min/max depth value is corrected---")
                     print ("####################")
-                
                    
 
 
@@ -1750,6 +1748,8 @@ def main(args=None):
                     print ("---The min/max depth value is corrected---")
                     print ("####################")
 
+
+
         elif nV == 3:
 
             lista = inputValue.split('--')[1:]
@@ -1820,10 +1820,984 @@ def main(args=None):
                     print ("---The min/max depth value is corrected---")
                     print ("####################")
 
+
+
+
+
+    #######################
+    #Download By MONTH+DEPTH
+    #######################
+
+    def downloadbydepthMonth():
+
+        def countX(lst, x):
+            count = 0
+            for ele in a:
+                if (ele==x):
+                    count = count+1
+            return count
+
+
+        def extract_from_link(lista):
+            for element in lista:
+                e = element.split(' ')[1]
+                listnew.append(e)
+
+        def extractstart(listast):
+            for element in listast:
+                e = element.split(' ')
+                styyyymmdd.append(e)
+
+
+        def extractend(listaend):
+            for element in listaend:
+                e = element.split(' ')
+                endyyyymmdd.append(e)
+
+
+        def load_options(default_values):
+            class cmemsval(dict):
+                pass
+            values=cmemsval()
+            for k,v in default_values.items():
+                setattr(values, k, v)
+            return values
+
+
+        
+        info = "--describe-product"
+        inputValue = txt1.get("1.0","end-1c") +" "+ info
+        print (inputValue)
+        os.system(inputValue)
+
+        modname = fname1.get()[:-3]
+        #print (modname)
+
+        tree = ET.parse(Voutmc1.get()+"/"+ modname + ".xml")
+        root = tree.getroot()
+        depth = root[2].text
+        listadepth = []
+        listadepth = depth.split(';')
+        #print (listadepth)
+
+        inputValue = txt1.get("1.21",'end-1c')
+        #print (inputValue)
+        a = inputValue.split()
+        nV = countX(a, x)
         
 
+        if nV == 1:
+
+            lista = inputValue.split('--')[1:]
+            listnew = []
+            extract_from_link(lista)
+            Us,Pw,Mot,Pr,Ds,Longmin,Longmax,Latmin,Latmax,sd,ed,dmin,dmax,v1,Outdir,fname = listnew
+
+            #and then finally I obtain the Parameters in the correct format
+
+            cmems_user = str(Us)
+            cmems_pass = str(Pw)
+
+            proxy_user = None
+            proxy_pass = None
+            proxy_server = None
+
+            outputdir = str(Outdir)
+            outputname = str(fname)
+            motu_server = str(Mot)
+            product_id = str(Pr)
+            dataset_id = str(Ds)
+
+            depth_min = float(dmin)
+            depth_max = float(dmax)
+
+            lon_min = float(Longmin)
+            lon_max = float(Longmax)
+            lat_min = float(Latmin)
+            lat_max = float(Latmax)
+            
+            t1= sd[0:10]
+            t2= ed[0:10]
+
+            #############################
+            styyyymmdd = []
+            endyyyymmdd = []
+
+            listast = t1.split('-')
+            listaend = t2.split('-')
+                
+            extractstart(listast) 
+            extractend(listaend)
+
+            yyyystart,mmstart,dds = styyyymmdd
+            yyyyend,mmend,dde = endyyyymmdd
+
+            year1 = int(yyyystart[0])
+            month1 = int(mmstart[0])
+            d1 = int(dds[0])
+
+            year2 = int(yyyyend[0])
+            month2 = int(mmend[0])
+            d2 = int(dde[0])
+            #############################
+
+            hhstar = str(hhstartentry.get())
+            hhend = str(hhendentry.get())
+
+            tmin = t1 + " " + hhstar
+            tmax = t2 + " " + hhend
+            
+            date_start = dt.datetime(year1,month1,d1,0,0)
+            date_end = dt.datetime(year2,month2,d2,0,0)
+
+            while (date_start <= date_end):
+            
+                for z in listadepth:
+
+                    def truncate(f, n):
+                        return math.floor(f * 10 ** n) / 10 ** n 
+                    
+                    zformat = truncate(float(z), 2)
+                    z1 = zformat
+                    z2 = float(zformat) + 0.01
+
+                    
+                    date_end_cmd = (dt.datetime(date_start.year, date_start.month,calendar.monthrange(date_start.year, date_start.month)[1]))
+                    date_cmd =  date_start.strftime("%Y-%m-%d") + hhstart , date_end_cmd.strftime("%Y-%m-%d") + hhend 
+                
+                    date_min = date_cmd[0]
+                    date_max = date_cmd[1]
+
+                    outputname1 = "CMEMS_" + date_min[0:10] + "_"+ date_max[0:10] + "_"+z+"-Depth"+".nc"
+                
+                    default_values = {'date_min': str(date_min),'date_max': str(date_max),'depth_min': str(z), 'depth_max': str(z),'longitude_max': lon_max,'longitude_min': lon_min,'latitude_min': lat_min,'latitude_max': lat_max,'describe': None, 'auth_mode': 'cas', 'motu': motu_server,'block_size': 65536, 'log_level': 30, 'out_dir': outputdir,'socket_timeout': None,'sync': None,  'proxy_server': proxy_server,'proxy_user': proxy_user,'proxy_pwd': proxy_pass, 'user': cmems_user, 'pwd': cmems_pass,'variable': [v1],'product_id': dataset_id,'service_id': product_id,'user_agent': None,'out_name': outputname, 'outputWritten': 'netcdf','size' : '','console_mode': ''}
+                    print(outputname1)
+                    _opts = load_options(default_values)
+                    mt.motu_api.execute_request(_opts)
+
+                    exsist = os.path.isfile(outputdir + "/" + outputname1 )
+
+                    if exsist:
+                        print("---The depth correction is not required---")
+                        print ("####################")
 
 
+                    outputname2 = "CMEMS_" + date_min[0:10] + "_"+ date_max[0:10] +"_"+z+"-Depth"+ ".nc"
+
+                    default_values = {'date_min': str(date_min),'date_max': str(date_max),'depth_min': str(z1), 'depth_max': str(z2),'longitude_max': lon_max,'longitude_min': lon_min,'latitude_min': lat_min,'latitude_max': lat_max,'describe': None, 'auth_mode': 'cas', 'motu': motu_server,'block_size': 65536, 'log_level': 30, 'out_dir': outputdir,'socket_timeout': None,'sync': None,  'proxy_server': proxy_server,'proxy_user': proxy_user,'proxy_pwd': proxy_pass, 'user': cmems_user, 'pwd': cmems_pass,'variable': [v1],'product_id': dataset_id,'service_id': product_id,'user_agent': None,'out_name': outputname2, 'outputWritten': 'netcdf','size' : '','console_mode': ''}
+                    print(outputname2)
+                    _opts = load_options(default_values)
+                    mt.motu_api.execute_request(_opts)
+                    print ("---The min/max depth value is corrected---")
+                    print ("####################")
+
+                date_start = date_end_cmd + dt.timedelta(days=1)
+                
+                   
+    
+        elif nV == 2:
+
+            lista = inputValue.split('--')[1:]
+            listnew = []
+            extract_from_link(lista)
+            Us,Pw,Mot,Pr,Ds,Longmin,Longmax,Latmin,Latmax,sd,ed,dmin,dmax,v1,v2,Outdir,fname = listnew
+
+            #and then finally I obtain the Parameters in the correct format
+
+            cmems_user = str(Us)
+            cmems_pass = str(Pw)
+
+            proxy_user = None
+            proxy_pass = None
+            proxy_server = None
+
+            outputdir = str(Outdir)
+            outputname = str(fname)
+            motu_server = str(Mot)
+            product_id = str(Pr)
+            dataset_id = str(Ds)
+
+            depth_min = float(dmin)
+            depth_max = float(dmax)
+
+            lon_min = float(Longmin)
+            lon_max = float(Longmax)
+            lat_min = float(Latmin)
+            lat_max = float(Latmax)
+            
+            t1= sd[0:10]
+            t2= ed[0:10]
+
+            #############################
+            styyyymmdd = []
+            endyyyymmdd = []
+
+            listast = t1.split('-')
+            listaend = t2.split('-')
+                
+            extractstart(listast) 
+            extractend(listaend)
+
+            yyyystart,mmstart,dds = styyyymmdd
+            yyyyend,mmend,dde = endyyyymmdd
+
+            year1 = int(yyyystart[0])
+            month1 = int(mmstart[0])
+            d1 = int(dds[0])
+
+            year2 = int(yyyyend[0])
+            month2 = int(mmend[0])
+            d2 = int(dde[0])
+            #############################
+
+            hhstar = str(hhstartentry.get())
+            hhend = str(hhendentry.get())
+
+            tmin = t1 + " " + hhstar
+            tmax = t2 + " " + hhend
+            
+            date_start = dt.datetime(year1,month1,d1,0,0)
+            date_end = dt.datetime(year2,month2,d2,0,0)
+
+            while (date_start <= date_end):
+            
+                for z in listadepth:
+
+                    def truncate(f, n):
+                        return math.floor(f * 10 ** n) / 10 ** n 
+                    
+                    zformat = truncate(float(z), 2)
+                    z1 = zformat
+                    z2 = float(zformat) + 0.01
+
+                    
+                    date_end_cmd = (dt.datetime(date_start.year, date_start.month,calendar.monthrange(date_start.year, date_start.month)[1]))
+                    date_cmd =  date_start.strftime("%Y-%m-%d") + hhstart , date_end_cmd.strftime("%Y-%m-%d") + hhend 
+                
+                    date_min = date_cmd[0]
+                    date_max = date_cmd[1]
+
+                    outputname1 = "CMEMS_" + date_min[0:10] + "_"+ date_max[0:10] + "_"+z+"-Depth"+".nc"
+                
+                    default_values = {'date_min': str(date_min),'date_max': str(date_max),'depth_min': str(z), 'depth_max': str(z),'longitude_max': lon_max,'longitude_min': lon_min,'latitude_min': lat_min,'latitude_max': lat_max,'describe': None, 'auth_mode': 'cas', 'motu': motu_server,'block_size': 65536, 'log_level': 30, 'out_dir': outputdir,'socket_timeout': None,'sync': None,  'proxy_server': proxy_server,'proxy_user': proxy_user,'proxy_pwd': proxy_pass, 'user': cmems_user, 'pwd': cmems_pass,'variable': [v1,v2],'product_id': dataset_id,'service_id': product_id,'user_agent': None,'out_name': outputname, 'outputWritten': 'netcdf','size' : '','console_mode': ''}
+                    print(outputname1)
+                    _opts = load_options(default_values)
+                    mt.motu_api.execute_request(_opts)
+
+                    exsist = os.path.isfile(outputdir + "/" + outputname1 )
+
+                    if exsist:
+                        print("---The depth correction is not required---")
+                        print ("####################")
+
+
+                    outputname2 = "CMEMS_" + date_min[0:10] + "_"+ date_max[0:10] +"_"+z+"-Depth"+ ".nc"
+
+                    default_values = {'date_min': str(date_min),'date_max': str(date_max),'depth_min': str(z1), 'depth_max': str(z2),'longitude_max': lon_max,'longitude_min': lon_min,'latitude_min': lat_min,'latitude_max': lat_max,'describe': None, 'auth_mode': 'cas', 'motu': motu_server,'block_size': 65536, 'log_level': 30, 'out_dir': outputdir,'socket_timeout': None,'sync': None,  'proxy_server': proxy_server,'proxy_user': proxy_user,'proxy_pwd': proxy_pass, 'user': cmems_user, 'pwd': cmems_pass,'variable': [v1,v2],'product_id': dataset_id,'service_id': product_id,'user_agent': None,'out_name': outputname2, 'outputWritten': 'netcdf','size' : '','console_mode': ''}
+                    print(outputname2)
+                    _opts = load_options(default_values)
+                    mt.motu_api.execute_request(_opts)
+                    print ("---The min/max depth value is corrected---")
+                    print ("####################")
+
+                date_start = date_end_cmd + dt.timedelta(days=1)
+
+
+
+        elif nV == 3:
+
+            lista = inputValue.split('--')[1:]
+            listnew = []
+            extract_from_link(lista)
+            Us,Pw,Mot,Pr,Ds,Longmin,Longmax,Latmin,Latmax,sd,ed,dmin,dmax,v1,v2,v3,Outdir,fname = listnew
+
+            #and then finally I obtain the Parameters in the correct format
+
+            cmems_user = str(Us)
+            cmems_pass = str(Pw)
+
+            proxy_user = None
+            proxy_pass = None
+            proxy_server = None
+
+            outputdir = str(Outdir)
+            outputname = str(fname)
+            motu_server = str(Mot)
+            product_id = str(Pr)
+            dataset_id = str(Ds)
+
+            depth_min = float(dmin)
+            depth_max = float(dmax)
+
+            lon_min = float(Longmin)
+            lon_max = float(Longmax)
+            lat_min = float(Latmin)
+            lat_max = float(Latmax)
+            
+            t1= sd[0:10]
+            t2= ed[0:10]
+
+            #############################
+            styyyymmdd = []
+            endyyyymmdd = []
+
+            listast = t1.split('-')
+            listaend = t2.split('-')
+                
+            extractstart(listast) 
+            extractend(listaend)
+
+            yyyystart,mmstart,dds = styyyymmdd
+            yyyyend,mmend,dde = endyyyymmdd
+
+            year1 = int(yyyystart[0])
+            month1 = int(mmstart[0])
+            d1 = int(dds[0])
+
+            year2 = int(yyyyend[0])
+            month2 = int(mmend[0])
+            d2 = int(dde[0])
+            #############################
+
+            hhstar = str(hhstartentry.get())
+            hhend = str(hhendentry.get())
+
+            tmin = t1 + " " + hhstar
+            tmax = t2 + " " + hhend
+            
+            date_start = dt.datetime(year1,month1,d1,0,0)
+            date_end = dt.datetime(year2,month2,d2,0,0)
+
+            while (date_start <= date_end):
+            
+                for z in listadepth:
+
+                    def truncate(f, n):
+                        return math.floor(f * 10 ** n) / 10 ** n 
+                    
+                    zformat = truncate(float(z), 2)
+                    z1 = zformat
+                    z2 = float(zformat) + 0.01
+
+                    
+                    date_end_cmd = (dt.datetime(date_start.year, date_start.month,calendar.monthrange(date_start.year, date_start.month)[1]))
+                    date_cmd =  date_start.strftime("%Y-%m-%d") + hhstart , date_end_cmd.strftime("%Y-%m-%d") + hhend 
+                
+                    date_min = date_cmd[0]
+                    date_max = date_cmd[1]
+
+                    outputname1 = "CMEMS_" + date_min[0:10] + "_"+ date_max[0:10] + "_"+z+"-Depth"+".nc"
+                
+                    default_values = {'date_min': str(date_min),'date_max': str(date_max),'depth_min': str(z), 'depth_max': str(z),'longitude_max': lon_max,'longitude_min': lon_min,'latitude_min': lat_min,'latitude_max': lat_max,'describe': None, 'auth_mode': 'cas', 'motu': motu_server,'block_size': 65536, 'log_level': 30, 'out_dir': outputdir,'socket_timeout': None,'sync': None,  'proxy_server': proxy_server,'proxy_user': proxy_user,'proxy_pwd': proxy_pass, 'user': cmems_user, 'pwd': cmems_pass,'variable': [v1,v2,v3],'product_id': dataset_id,'service_id': product_id,'user_agent': None,'out_name': outputname, 'outputWritten': 'netcdf','size' : '','console_mode': ''}
+                    print(outputname1)
+                    _opts = load_options(default_values)
+                    mt.motu_api.execute_request(_opts)
+
+                    exsist = os.path.isfile(outputdir + "/" + outputname1 )
+
+                    if exsist:
+                        print("---The depth correction is not required---")
+                        print ("####################")
+
+
+                    outputname2 = "CMEMS_" + date_min[0:10] + "_"+ date_max[0:10] +"_"+z+"-Depth"+ ".nc"
+
+                    default_values = {'date_min': str(date_min),'date_max': str(date_max),'depth_min': str(z1), 'depth_max': str(z2),'longitude_max': lon_max,'longitude_min': lon_min,'latitude_min': lat_min,'latitude_max': lat_max,'describe': None, 'auth_mode': 'cas', 'motu': motu_server,'block_size': 65536, 'log_level': 30, 'out_dir': outputdir,'socket_timeout': None,'sync': None,  'proxy_server': proxy_server,'proxy_user': proxy_user,'proxy_pwd': proxy_pass, 'user': cmems_user, 'pwd': cmems_pass,'variable': [v1,v2,v3],'product_id': dataset_id,'service_id': product_id,'user_agent': None,'out_name': outputname2, 'outputWritten': 'netcdf','size' : '','console_mode': ''}
+                    print(outputname2)
+                    _opts = load_options(default_values)
+                    mt.motu_api.execute_request(_opts)
+                    print ("---The min/max depth value is corrected---")
+                    print ("####################")
+
+                date_start = date_end_cmd + dt.timedelta(days=1)
+
+                
+    
+    #######################
+    #Download By Year
+    #######################
+
+    def downloadYearly():
+
+        def countX(lst, x):
+            count = 0
+            for ele in a:
+                if (ele==x):
+                    count = count+1
+            return count
+
+
+        def extract_from_link(lista):
+            for element in lista:
+                e = element.split(' ')[1]
+                listnew.append(e)
+
+
+        def extractstart(listast):
+            for element in listast:
+                e = element.split(' ')
+                styyyymmdd.append(e)
+
+
+        def extractend(listaend):
+            for element in listaend:
+                e = element.split(' ')
+                endyyyymmdd.append(e)
+
+
+        def load_options(default_values):
+            class cmemsval(dict):
+                pass
+            values=cmemsval()
+            for k,v in default_values.items():
+                setattr(values, k, v)
+            return values
+    
+
+        inputValue = txt1.get("1.21",'end-1c')
+        print (inputValue)
+        a = inputValue.split()
+        #print(a)
+        nV = countX(a, x)
+        dV = countX(a, z)
+        #print(nV)
+        #print(dV)
+
+
+        if dV == 0 and nV == 1:
+
+            lista = inputValue.split('--')[1:]
+            listnew = []
+            extract_from_link(lista)
+            Us,Pw,Mot,Pr,Ds,Longmin,Longmax,Latmin,Latmax,sd,ed,v1,Outdir,fname = listnew
+
+            #and then finally I obtain the Parameters in the correct format
+            cmems_user = str(Us)
+            cmems_pass = str(Pw)
+
+            proxy_user = None
+            proxy_pass = None
+            proxy_server = None
+
+            outputdir = str(Outdir)
+            outputname = str(fname)
+            motu_server = str(Mot)
+            product_id = str(Pr)
+            dataset_id = str(Ds)
+
+            #depth_min = float(dmin)
+            #depth_max = float(dmax)
+
+            lon_min = float(Longmin)
+            lon_max = float(Longmax)
+            lat_min = float(Latmin)
+            lat_max = float(Latmax)
+            
+            t1 = sd[0:10]
+            t2 = ed[0:10]
+            
+            #############################
+            styyyymmdd = []
+            endyyyymmdd = []
+
+            listast = t1.split('-')
+            listaend = t2.split('-')
+                
+            extractstart(listast) 
+            extractend(listaend)
+
+            yyyystart,mmstart,dds = styyyymmdd
+            yyyyend,mmend,dde = endyyyymmdd
+
+            year1 = int(yyyystart[0])
+            month1 = int(mmstart[0])
+            d1 = int(dds[0])
+
+            year2 = int(yyyyend[0])
+            month2 = int(mmend[0])
+            d2 = int(dde[0])
+            #############################
+
+            hhstar = str(hhstartentry.get())
+            hhend = str(hhendentry.get())
+
+            tmin = t1 + " " + hhstar
+            tmax = t2 + " " + hhend
+
+            date_start = dt.datetime(year1,month1,d1,0,0)
+            date_end = dt.datetime(year2,month2,d2,0,0)
+
+            for key, value in default_values.items():
+                
+                while (date_start < date_end):
+                #while (date_start <= date_end):
+
+                    date_end_cmd = date_start + dt.timedelta(days=365)
+                    #date_end_cmd = (dt.datetime(date_start.year +1, date_start.month, calendar.monthrange(date_start.year, date_start.month)[1]))
+                    
+                    date_cmd =  date_start.strftime("%Y-%m-%d") + hhstart , date_end_cmd.strftime("%Y-%m-%d") + hhend 
+                
+                    date_min = date_cmd[0]
+                    date_max = date_cmd[1]
+                    outputname = "CMEMS_" + date_min[0:10] + "_"+ date_max[0:10] + ".nc"
+                
+                    default_values = {'date_min': str(date_min),'date_max': str(date_max),'depth_min': '', 'depth_max': '','longitude_max': lon_max,'longitude_min': lon_min,'latitude_min': lat_min,'latitude_max': lat_max,'describe': None, 'auth_mode': 'cas', 'motu': motu_server,'block_size': 65536, 'log_level': 30, 'out_dir': outputdir,'socket_timeout': None,'sync': None,  'proxy_server': proxy_server,'proxy_user': proxy_user,'proxy_pwd': proxy_pass, 'user': cmems_user, 'pwd': cmems_pass,'variable': [v1],'product_id': dataset_id,'service_id': product_id,'user_agent': None,'out_name': outputname, 'outputWritten': 'netcdf','size' : '','console_mode': ''}
+            
+                    print(outputname)
+                    
+                    _opts = load_options(default_values)
+                    mt.motu_api.execute_request(_opts)
+                
+                    date_start = date_start + dt.timedelta(days=365)
+                    #date_start = date_end_cmd + dt.timedelta(days=365)
+
+            
+
+            if dV == 1 and nV == 1:
+
+                lista = inputValue.split('--')[1:]
+                listnew = []
+                extract_from_link(lista)
+                Us,Pw,Mot,Pr,Ds,Longmin,Longmax,Latmin,Latmax,sd,ed,dmin,dmax,v1,Outdir,fname = listnew
+
+                #and then finally I obtain the Parameters in the correct format
+                cmems_user = str(Us)
+                cmems_pass = str(Pw)
+
+                proxy_user = None
+                proxy_pass = None
+                proxy_server = None
+
+                outputdir = str(Outdir)
+                outputname = str(fname)
+                motu_server = str(Mot)
+                product_id = str(Pr)
+                dataset_id = str(Ds)
+
+                depth_min = float(dmin)
+                depth_max = float(dmax)
+
+                lon_min = float(Longmin)
+                lon_max = float(Longmax)
+                lat_min = float(Latmin)
+                lat_max = float(Latmax)
+                
+                t1 = sd[0:10]
+                t2 = ed[0:10]
+                
+                #############################
+                styyyymmdd = []
+                endyyyymmdd = []
+
+                listast = t1.split('-')
+                listaend = t2.split('-')
+                    
+                extractstart(listast) 
+                extractend(listaend)
+
+                yyyystart,mmstart,dds = styyyymmdd
+                yyyyend,mmend,dde = endyyyymmdd
+
+                year1 = int(yyyystart[0])
+                month1 = int(mmstart[0])
+                d1 = int(dds[0])
+
+                year2 = int(yyyyend[0])
+                month2 = int(mmend[0])
+                d2 = int(dde[0])
+                #############################
+
+                hhstar = str(hhstartentry.get())
+                hhend = str(hhendentry.get())
+
+                tmin = t1 + " " + hhstar
+                tmax = t2 + " " + hhend
+
+                date_start = dt.datetime(year1,month1,d1,0,0)
+                date_end = dt.datetime(year2,month2,d2,0,0)
+
+                for key, value in default_values.items():
+                    
+                    while (date_start < date_end):
+                    #while (date_start <= date_end):
+
+                        date_end_cmd = date_start + dt.timedelta(days=365)
+                        #date_end_cmd = (dt.datetime(date_start.year +1, date_start.month, calendar.monthrange(date_start.year, date_start.month)[1]))
+                        
+                        date_cmd =  date_start.strftime("%Y-%m-%d") + hhstart , date_end_cmd.strftime("%Y-%m-%d") + hhend 
+                    
+                        date_min = date_cmd[0]
+                        date_max = date_cmd[1]
+                        outputname = "CMEMS_" + date_min[0:10] + "_"+ date_max[0:10] + ".nc"
+                    
+                        default_values = {'date_min': str(date_min),'date_max': str(date_max),'depth_min': depth_min, 'depth_max': depth_max,'longitude_max': lon_max,'longitude_min': lon_min,'latitude_min': lat_min,'latitude_max': lat_max,'describe': None, 'auth_mode': 'cas', 'motu': motu_server,'block_size': 65536, 'log_level': 30, 'out_dir': outputdir,'socket_timeout': None,'sync': None,  'proxy_server': proxy_server,'proxy_user': proxy_user,'proxy_pwd': proxy_pass, 'user': cmems_user, 'pwd': cmems_pass,'variable': [v1],'product_id': dataset_id,'service_id': product_id,'user_agent': None,'out_name': outputname, 'outputWritten': 'netcdf','size' : '','console_mode': ''}
+                
+                        print(outputname)
+                        
+                        _opts = load_options(default_values)
+                        mt.motu_api.execute_request(_opts)
+                    
+                        date_start = date_start + dt.timedelta(days=365)
+                        #date_start = date_end_cmd + dt.timedelta(days=365)
+
+
+            if dV == 0 and nV == 2:
+
+                lista = inputValue.split('--')[1:]
+                listnew = []
+                extract_from_link(lista)
+                Us,Pw,Mot,Pr,Ds,Longmin,Longmax,Latmin,Latmax,sd,ed,v1,v2,Outdir,fname = listnew
+
+                #and then finally I obtain the Parameters in the correct format
+                cmems_user = str(Us)
+                cmems_pass = str(Pw)
+
+                proxy_user = None
+                proxy_pass = None
+                proxy_server = None
+
+                outputdir = str(Outdir)
+                outputname = str(fname)
+                motu_server = str(Mot)
+                product_id = str(Pr)
+                dataset_id = str(Ds)
+
+                #depth_min = float(dmin)
+                #depth_max = float(dmax)
+
+                lon_min = float(Longmin)
+                lon_max = float(Longmax)
+                lat_min = float(Latmin)
+                lat_max = float(Latmax)
+                
+                t1 = sd[0:10]
+                t2 = ed[0:10]
+                
+                #############################
+                styyyymmdd = []
+                endyyyymmdd = []
+
+                listast = t1.split('-')
+                listaend = t2.split('-')
+                    
+                extractstart(listast) 
+                extractend(listaend)
+
+                yyyystart,mmstart,dds = styyyymmdd
+                yyyyend,mmend,dde = endyyyymmdd
+
+                year1 = int(yyyystart[0])
+                month1 = int(mmstart[0])
+                d1 = int(dds[0])
+
+                year2 = int(yyyyend[0])
+                month2 = int(mmend[0])
+                d2 = int(dde[0])
+                #############################
+
+                hhstar = str(hhstartentry.get())
+                hhend = str(hhendentry.get())
+
+                tmin = t1 + " " + hhstar
+                tmax = t2 + " " + hhend
+
+                date_start = dt.datetime(year1,month1,d1,0,0)
+                date_end = dt.datetime(year2,month2,d2,0,0)
+
+                for key, value in default_values.items():
+                    
+                    while (date_start < date_end):
+                    #while (date_start <= date_end):
+
+                        date_end_cmd = date_start + dt.timedelta(days=365)
+                        #date_end_cmd = (dt.datetime(date_start.year +1, date_start.month, calendar.monthrange(date_start.year, date_start.month)[1]))
+                        
+                        date_cmd =  date_start.strftime("%Y-%m-%d") + hhstart , date_end_cmd.strftime("%Y-%m-%d") + hhend 
+                    
+                        date_min = date_cmd[0]
+                        date_max = date_cmd[1]
+                        outputname = "CMEMS_" + date_min[0:10] + "_"+ date_max[0:10] + ".nc"
+                    
+                        default_values = {'date_min': str(date_min),'date_max': str(date_max),'depth_min': '', 'depth_max': '','longitude_max': lon_max,'longitude_min': lon_min,'latitude_min': lat_min,'latitude_max': lat_max,'describe': None, 'auth_mode': 'cas', 'motu': motu_server,'block_size': 65536, 'log_level': 30, 'out_dir': outputdir,'socket_timeout': None,'sync': None,  'proxy_server': proxy_server,'proxy_user': proxy_user,'proxy_pwd': proxy_pass, 'user': cmems_user, 'pwd': cmems_pass,'variable': [v1,v2],'product_id': dataset_id,'service_id': product_id,'user_agent': None,'out_name': outputname, 'outputWritten': 'netcdf','size' : '','console_mode': ''}
+                
+                        print(outputname)
+                        
+                        _opts = load_options(default_values)
+                        mt.motu_api.execute_request(_opts)
+                    
+                        date_start = date_start + dt.timedelta(days=365)
+                        #date_start = date_end_cmd + dt.timedelta(days=365)
+
+            
+
+            if dV == 1 and nV == 2:
+
+                lista = inputValue.split('--')[1:]
+                listnew = []
+                extract_from_link(lista)
+                Us,Pw,Mot,Pr,Ds,Longmin,Longmax,Latmin,Latmax,sd,ed,dmin,dmax,v1,v2,Outdir,fname = listnew
+
+                #and then finally I obtain the Parameters in the correct format
+                cmems_user = str(Us)
+                cmems_pass = str(Pw)
+
+                proxy_user = None
+                proxy_pass = None
+                proxy_server = None
+
+                outputdir = str(Outdir)
+                outputname = str(fname)
+                motu_server = str(Mot)
+                product_id = str(Pr)
+                dataset_id = str(Ds)
+
+                depth_min = float(dmin)
+                depth_max = float(dmax)
+
+                lon_min = float(Longmin)
+                lon_max = float(Longmax)
+                lat_min = float(Latmin)
+                lat_max = float(Latmax)
+                
+                t1 = sd[0:10]
+                t2 = ed[0:10]
+                
+                #############################
+                styyyymmdd = []
+                endyyyymmdd = []
+
+                listast = t1.split('-')
+                listaend = t2.split('-')
+                    
+                extractstart(listast) 
+                extractend(listaend)
+
+                yyyystart,mmstart,dds = styyyymmdd
+                yyyyend,mmend,dde = endyyyymmdd
+
+                year1 = int(yyyystart[0])
+                month1 = int(mmstart[0])
+                d1 = int(dds[0])
+
+                year2 = int(yyyyend[0])
+                month2 = int(mmend[0])
+                d2 = int(dde[0])
+                #############################
+
+                hhstar = str(hhstartentry.get())
+                hhend = str(hhendentry.get())
+
+                tmin = t1 + " " + hhstar
+                tmax = t2 + " " + hhend
+
+                date_start = dt.datetime(year1,month1,d1,0,0)
+                date_end = dt.datetime(year2,month2,d2,0,0)
+
+                for key, value in default_values.items():
+                    
+                    while (date_start < date_end):
+                    #while (date_start <= date_end):
+
+                        date_end_cmd = date_start + dt.timedelta(days=365)
+                        #date_end_cmd = (dt.datetime(date_start.year +1, date_start.month, calendar.monthrange(date_start.year, date_start.month)[1]))
+                        
+                        date_cmd =  date_start.strftime("%Y-%m-%d") + hhstart , date_end_cmd.strftime("%Y-%m-%d") + hhend 
+                    
+                        date_min = date_cmd[0]
+                        date_max = date_cmd[1]
+                        outputname = "CMEMS_" + date_min[0:10] + "_"+ date_max[0:10] + ".nc"
+                    
+                        default_values = {'date_min': str(date_min),'date_max': str(date_max),'depth_min': depth_min, 'depth_max': depth_max,'longitude_max': lon_max,'longitude_min': lon_min,'latitude_min': lat_min,'latitude_max': lat_max,'describe': None, 'auth_mode': 'cas', 'motu': motu_server,'block_size': 65536, 'log_level': 30, 'out_dir': outputdir,'socket_timeout': None,'sync': None,  'proxy_server': proxy_server,'proxy_user': proxy_user,'proxy_pwd': proxy_pass, 'user': cmems_user, 'pwd': cmems_pass,'variable': [v1,v2],'product_id': dataset_id,'service_id': product_id,'user_agent': None,'out_name': outputname, 'outputWritten': 'netcdf','size' : '','console_mode': ''}
+                
+                        print(outputname)
+                        
+                        _opts = load_options(default_values)
+                        mt.motu_api.execute_request(_opts)
+                    
+                        date_start = date_start + dt.timedelta(days=365)
+                        #date_start = date_end_cmd + dt.timedelta(days=365)
+
+
+
+            if dV == 0 and nV == 3:
+
+                lista = inputValue.split('--')[1:]
+                listnew = []
+                extract_from_link(lista)
+                Us,Pw,Mot,Pr,Ds,Longmin,Longmax,Latmin,Latmax,sd,ed,v1,v2,v3,Outdir,fname = listnew
+
+                #and then finally I obtain the Parameters in the correct format
+                cmems_user = str(Us)
+                cmems_pass = str(Pw)
+
+                proxy_user = None
+                proxy_pass = None
+                proxy_server = None
+
+                outputdir = str(Outdir)
+                outputname = str(fname)
+                motu_server = str(Mot)
+                product_id = str(Pr)
+                dataset_id = str(Ds)
+
+                #depth_min = float(dmin)
+                #depth_max = float(dmax)
+
+                lon_min = float(Longmin)
+                lon_max = float(Longmax)
+                lat_min = float(Latmin)
+                lat_max = float(Latmax)
+                
+                t1 = sd[0:10]
+                t2 = ed[0:10]
+                
+                #############################
+                styyyymmdd = []
+                endyyyymmdd = []
+
+                listast = t1.split('-')
+                listaend = t2.split('-')
+                    
+                extractstart(listast) 
+                extractend(listaend)
+
+                yyyystart,mmstart,dds = styyyymmdd
+                yyyyend,mmend,dde = endyyyymmdd
+
+                year1 = int(yyyystart[0])
+                month1 = int(mmstart[0])
+                d1 = int(dds[0])
+
+                year2 = int(yyyyend[0])
+                month2 = int(mmend[0])
+                d2 = int(dde[0])
+                #############################
+
+                hhstar = str(hhstartentry.get())
+                hhend = str(hhendentry.get())
+
+                tmin = t1 + " " + hhstar
+                tmax = t2 + " " + hhend
+
+                date_start = dt.datetime(year1,month1,d1,0,0)
+                date_end = dt.datetime(year2,month2,d2,0,0)
+
+                for key, value in default_values.items():
+                    
+                    while (date_start < date_end):
+                    #while (date_start <= date_end):
+
+                        date_end_cmd = date_start + dt.timedelta(days=365)
+                        #date_end_cmd = (dt.datetime(date_start.year +1, date_start.month, calendar.monthrange(date_start.year, date_start.month)[1]))
+                        
+                        date_cmd =  date_start.strftime("%Y-%m-%d") + hhstart , date_end_cmd.strftime("%Y-%m-%d") + hhend 
+                    
+                        date_min = date_cmd[0]
+                        date_max = date_cmd[1]
+                        outputname = "CMEMS_" + date_min[0:10] + "_"+ date_max[0:10] + ".nc"
+                    
+                        default_values = {'date_min': str(date_min),'date_max': str(date_max),'depth_min': '', 'depth_max': '','longitude_max': lon_max,'longitude_min': lon_min,'latitude_min': lat_min,'latitude_max': lat_max,'describe': None, 'auth_mode': 'cas', 'motu': motu_server,'block_size': 65536, 'log_level': 30, 'out_dir': outputdir,'socket_timeout': None,'sync': None,  'proxy_server': proxy_server,'proxy_user': proxy_user,'proxy_pwd': proxy_pass, 'user': cmems_user, 'pwd': cmems_pass,'variable': [v1,v2,v3],'product_id': dataset_id,'service_id': product_id,'user_agent': None,'out_name': outputname, 'outputWritten': 'netcdf','size' : '','console_mode': ''}
+                
+                        print(outputname)
+                        
+                        _opts = load_options(default_values)
+                        mt.motu_api.execute_request(_opts)
+                    
+                        date_start = date_start + dt.timedelta(days=365)
+                        #date_start = date_end_cmd + dt.timedelta(days=365)
+
+            
+
+            if dV == 1 and nV == 3:
+
+                lista = inputValue.split('--')[1:]
+                listnew = []
+                extract_from_link(lista)
+                Us,Pw,Mot,Pr,Ds,Longmin,Longmax,Latmin,Latmax,sd,ed,dmin,dmax,v1,v2,v3,Outdir,fname = listnew
+
+                #and then finally I obtain the Parameters in the correct format
+                cmems_user = str(Us)
+                cmems_pass = str(Pw)
+
+                proxy_user = None
+                proxy_pass = None
+                proxy_server = None
+
+                outputdir = str(Outdir)
+                outputname = str(fname)
+                motu_server = str(Mot)
+                product_id = str(Pr)
+                dataset_id = str(Ds)
+
+                depth_min = float(dmin)
+                depth_max = float(dmax)
+
+                lon_min = float(Longmin)
+                lon_max = float(Longmax)
+                lat_min = float(Latmin)
+                lat_max = float(Latmax)
+                
+                t1 = sd[0:10]
+                t2 = ed[0:10]
+                
+                #############################
+                styyyymmdd = []
+                endyyyymmdd = []
+
+                listast = t1.split('-')
+                listaend = t2.split('-')
+                    
+                extractstart(listast) 
+                extractend(listaend)
+
+                yyyystart,mmstart,dds = styyyymmdd
+                yyyyend,mmend,dde = endyyyymmdd
+
+                year1 = int(yyyystart[0])
+                month1 = int(mmstart[0])
+                d1 = int(dds[0])
+
+                year2 = int(yyyyend[0])
+                month2 = int(mmend[0])
+                d2 = int(dde[0])
+                #############################
+
+                hhstar = str(hhstartentry.get())
+                hhend = str(hhendentry.get())
+
+                tmin = t1 + " " + hhstar
+                tmax = t2 + " " + hhend
+
+                date_start = dt.datetime(year1,month1,d1,0,0)
+                date_end = dt.datetime(year2,month2,d2,0,0)
+
+                for key, value in default_values.items():
+                    
+                    while (date_start < date_end):
+                    #while (date_start <= date_end):
+
+                        date_end_cmd = date_start + dt.timedelta(days=365)
+                        #date_end_cmd = (dt.datetime(date_start.year +1, date_start.month, calendar.monthrange(date_start.year, date_start.month)[1]))
+                        
+                        date_cmd =  date_start.strftime("%Y-%m-%d") + hhstart , date_end_cmd.strftime("%Y-%m-%d") + hhend 
+                    
+                        date_min = date_cmd[0]
+                        date_max = date_cmd[1]
+                        outputname = "CMEMS_" + date_min[0:10] + "_"+ date_max[0:10] + ".nc"
+                    
+                        default_values = {'date_min': str(date_min),'date_max': str(date_max),'depth_min': depth_min, 'depth_max': depth_max,'longitude_max': lon_max,'longitude_min': lon_min,'latitude_min': lat_min,'latitude_max': lat_max,'describe': None, 'auth_mode': 'cas', 'motu': motu_server,'block_size': 65536, 'log_level': 30, 'out_dir': outputdir,'socket_timeout': None,'sync': None,  'proxy_server': proxy_server,'proxy_user': proxy_user,'proxy_pwd': proxy_pass, 'user': cmems_user, 'pwd': cmems_pass,'variable': [v1,v2,v3],'product_id': dataset_id,'service_id': product_id,'user_agent': None,'out_name': outputname, 'outputWritten': 'netcdf','size' : '','console_mode': ''}
+                
+                        print(outputname)
+                        
+                        _opts = load_options(default_values)
+                        mt.motu_api.execute_request(_opts)
+                    
+                        date_start = date_start + dt.timedelta(days=365)
+                        #date_start = date_end_cmd + dt.timedelta(days=365)
+        
+    
+    
+    
     #########################################
     # LOGIC TO GENERATE LINK for DOWNLOAD....
 
@@ -2161,20 +3135,28 @@ def main(args=None):
     btn1 = Button(tab1, text="Clean-link", bg="white", command=genclean1)
     btn1.grid(column=1, row=32)
     ##
-    btn1 = Button(tab1, text="Download as single file", bg="red", command=downloadmotu1)
+    btn1 = Button(tab1, text="Download Single-file", bg="red", command=downloadmotu1)
     btn1.grid(column=0, row=33)
     ##
-    btn1 = Button(tab1, text="Download as monthly files", bg="red", command=downloadmotumontly1)
+    btn1 = Button(tab1, text="Download Montly", bg="red", command=downloadmotumontly1)
     btn1.grid(column=0, row=34)
     ###
-    btn1 = Button(tab1, text="Download as daily files", bg="red", command=downloaddaily)
+    btn1 = Button(tab1, text="Download Daily", bg="red", command=downloaddaily)
     btn1.grid(column=0, row=35)
     ###
-    btn1 = Button(tab1, text="Download by depths", bg="red", command=downloadbydepth1)
+    btn1 = Button(tab1, text="Download by Depths", bg="red", command=downloadbydepth1)
     btn1.grid(column=0, row=36)
     ###
-    space1 = Label(tab1, text="")
-    space1.grid(column=0, row=37)
+    btn1 = Button(tab1, text="Download by Month&Depth", bg="red", command=downloadbydepthMonth)
+    btn1.grid(column=0, row=37)
+    ###
+    btn1 = Button(tab1, text="Download by Years", bg="red", command=downloadYearly)
+    btn1.grid(column=0, row=38)
+    ###
+    #space1 = Label(tab1, text="")
+    #space1.grid(column=0, row=39)
+    ##
+    
     
     #hhmmssentrystart = hhstartentry.get()
     #hhmmssentrystart.grid(column=0, row=37)
