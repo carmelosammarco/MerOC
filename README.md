@@ -127,7 +127,7 @@ Below I am going to display a more detailed image of the "TAB 1: netCDF-Download
 
 ![Imgur](https://i.imgur.com/pjTohxB.png?3)
 
-![Imgur](https://i.imgur.com/Tqdnwmw.png?1)
+![Imgur](https://i.imgur.com/v3wHiIK.png)
 
 I can summarise the workflow of the "TAB 1: netCDF-Download" as the following:
 
