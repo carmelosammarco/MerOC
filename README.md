@@ -1,4 +1,3 @@
-![Imgur](https://i.imgur.com/iEWAtkS.gif?1)
 # MerOC    
  
 [![Build Status](https://travis-ci.com/carmelosammarco/MerOC.png)](https://travis-ci.com/carmelosammarco/MerOC) [![Build status](https://ci.appveyor.com/api/projects/status/qqy9y9iu1a473qk4?svg=true)](https://ci.appveyor.com/project/carmelosammarco/meroc) [![PyPi](https://img.shields.io/badge/PyPi-Project-yellow.svg)](https://pypi.org/project/MerOC/) [![Gitter](https://badges.gitter.im/MerOC/community.svg)](https://gitter.im/MerOC/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
