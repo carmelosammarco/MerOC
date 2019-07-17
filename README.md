@@ -159,6 +159,6 @@ This tab is able to convert the netCDF files in different formats (CSV, GRID and
 
 **The App For Windows can be downloaded from [HERE](https://www.dropbox.com/s/rjds1xvag67ygkc/MerOC-win.exe?dl=0).**
 
-It is still a prototype and then I will not guarantee that it will works. It is still in development but I just decided to give you a preview. Just for your information and technical reason in tab 2 is missing conversion in shapefile.
+It is still a prototype and then I will not guarantee that it will works. I just decided to give you a preview. Just for your information and technical reason in tab 2 is missing conversion in shapefile.
 
 -------
