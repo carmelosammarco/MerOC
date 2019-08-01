@@ -4,7 +4,7 @@
 
 I developed this software while working as [AKKA](https://www.akka-technologies.com) consultant engeneer for the [CMEMS's Service Desk (Copernicus Marine Environment Monitoring Service)](http://marine.copernicus.eu). I was and I am inspired by the Mercator-Ocean's community (users, co-workers, web-forum discussions and many more) which gave me ideas and the motivational power to build this tool. It is the first python application of its kind created inside the CMEMS environment and I hope that with time it will became an ufficial CMEMS tool. The main goals that I wanted to adress were solving the most common user problems as the data-download requests and the netCDF file manipulations.
 
-**This project gave me also ideas to develop other tools** as [tool4nc](https://github.com/carmelosammarco/tool4nc), [MerOCenv](https://github.com/carmelosammarco/MerOCenv) and [ads4mo](https://github.com/carmelosammarco/ads4mo). To know more about them just visit the projects web pages which are hyperlinked above.
+**This project gave me also ideas to develop other tools** as [tool4NC](https://github.com/carmelosammarco/tool4NC), [MerocENV](https://github.com/carmelosammarco/MerocENV) and [ads4MO](https://github.com/carmelosammarco/ads4MO). To know more about them just visit the projects web pages which are hyperlinked above.
 
 I created also a **chat-community** powered by "Gitter" where is possible have an exchange of ideas,functionalities,bugs and many more. Just click ![Gitter](https://badges.gitter.im/MerOC/community.svg) to acces the chat room.
 
@@ -151,7 +151,7 @@ To do that just a click to the more appropriate methods (based on your needs) is
 
 ### TAB 2: netCDF-Manipulation 
 
-This tab is able to convert the netCDF files in different formats (CSV, GRID and shape files), concatenate segments of data coming from the same dataset but at different time steps and split the data in function of the time. It is possible split the data by day(DD), months(YYYYMM) and years(YYYY) with the additional option of addiing a suffix to the data generated. More details about the functions included in  this tab are displayed in a separate published python module named [tool4nc](https://github.com/carmelosammarco/tool4nc) which bring in a easy coding form all the manipulation functionalities.
+This tab is able to convert the netCDF files in different formats (CSV, GRID and shape files), concatenate segments of data coming from the same dataset but at different time steps and split the data in function of the time. It is possible split the data by day(DD), months(YYYYMM) and years(YYYY) with the additional option of addiing a suffix to the data generated. More details about the functions included in  this tab are displayed in a separate published python module named [tool4NC](https://github.com/carmelosammarco/tool4NC) which bring in a easy coding form all the manipulation functionalities.
 
 ## Stand-alone window application:
 
