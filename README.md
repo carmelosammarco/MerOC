@@ -159,4 +159,4 @@ This tab is able to convert the netCDF files in different formats (CSV, GRID and
 
 **The App For Windows OS can be downloaded from [HERE](https://www.dropbox.com/s/rjds1xvag67ygkc/MerOC-win.exe?dl=0).**
 
-This APP is still a prototype and then in development. I just decided to give you a preview. Just for your information and technical reason many fuctionalities are not working at the moment especially in the "TAB2:netCDF-Manipulations" where the only active fuction at the moment is the conversion to csv.
+This APP is still a prototype and then in development. I just decided to give you a preview. Just for your information and technical reason many fuctionalities are not working at the moment especially in the "TAB2:netCDF-Manipulations" where the only active fuction is the conversion to csv.
