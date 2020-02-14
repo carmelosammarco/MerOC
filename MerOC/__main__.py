@@ -70,7 +70,7 @@ def main(args=None):
     tab_control.add(tab1, text='netCDF-Download')
     tab_control.add(tab2, text='netCDF-Manipulation')
 
-    window.title("adsGUI-by-Carmelo-Sammarco")
+    window.title("MerOC-by-Carmelo-Sammarco")
 
     #progbar1 = ttk.Progressbar(tab1, orient='horizontal', length=150, mode='indeterminate', value=1)
     #space1 = Label(tab1, text="In progress:")
