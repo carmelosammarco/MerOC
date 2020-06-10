@@ -4,7 +4,7 @@
 
 **I developed this software because motivated to improve my efficiency and productivity. It is just an attemp/idea/prototype and it is not fully optimased or considered stable.**
 
-**This project gave me also ideas to develop other tools** as [tool4NC](https://github.com/carmelosammarco/tool4NC), [MerocENV](https://github.com/carmelosammarco/MerocENV) and [ads4MO](https://github.com/carmelosammarco/ads4MO). To know more about them just visit the projects web pages which are hyperlinked above.
+**This project gave me also ideas to develop other tools** as [tool4NC](https://github.com/carmelosammarco/tool4NC), [JupLab4NetCDF](https://github.com/carmelosammarco/JupLab4NetCDF) and [ads4MO](https://github.com/carmelosammarco/ads4MO). To know more about them just visit the projects web pages which are hyperlinked above.
 
 I created also a **chat-community** powered by "Gitter" where is possible have an exchange of ideas,functionalities,bugs and many more. Just click ![Gitter](https://badges.gitter.im/MerOC/community.svg) to acces the chat room.
 
@@ -131,8 +131,8 @@ Below I am going to display a more detailed image of the "TAB 1: netCDF-Download
 I can summarise the workflow of the "TAB 1: netCDF-Download" as the following:
 
 **1) Filling the form with all the parameters required**
-- **CMEMS Usename**
-- **CMEMS Password**
+- **Usename**
+- **Password**
 - **Product :** name of the product 
 - **Dataset :** name of the dataset 
 - **Long min/max :** Longitude min and max
