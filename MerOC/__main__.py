@@ -1,5 +1,5 @@
 #####################################################################
-#Programm for Mercator Ocean by Carmelo Sammarco
+#Programm author: Carmelo Sammarco
 #####################################################################
 
 #<MerOC - Program to download and manipulate Netcdf files.>
