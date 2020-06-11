@@ -124,9 +124,9 @@ This Tab allows to subset the CMEMS products by bounding box, variables, depths 
 
 Below I am going to display a more detailed image of the "TAB 1: netCDF-Download". With different coulours are highlighted  the different "TAB" sections.
 
-![Imgur](https://i.imgur.com/mNzMCS0.png?1)
+![Imgur](https://i.imgur.com/)
 
-![Imgur](https://i.imgur.com/v3wHiIK.png)
+![Imgur](https://i.imgur.com/)
 
 I can summarise the workflow of the "TAB 1: netCDF-Download" as the following:
 
@@ -157,6 +157,6 @@ This tab is able to convert the netCDF files in different formats (CSV, GRID and
 
 -------
 
-**The App For Windows OS can be downloaded from [HERE](https://www.dropbox.com/s/rjds1xvag67ygkc/MerOC-win.exe?dl=0).**
+**The App For Windows OS can be downloaded from [HERE]().**
 
 This APP is still a prototype and then in development. I just decided to give you a preview. Just for your information and technical reason many fuctionalities are not working at the moment especially in the "TAB2:netCDF-Manipulations" where the only active fuction is the conversion to csv.
