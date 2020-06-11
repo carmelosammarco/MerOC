@@ -16,7 +16,7 @@ Many thanks to visit this page and try this software.
 
 Python software containing functions for simplifying the netCDF files download and manipulations. The registration to the [CMEMS web portal](http://marine.copernicus.eu) (by Copernicus) is required to be able to use the download services (TAB1:netCDF-Download). The other tools (TAB2:netCDF-Manipulations) can be used without any registration.
 
-![Imgur](https://i.imgur.com/)
+![Imgur](https://i.imgur.com/xPZ0p6y.jpg)
 
 
 ## Be aware that:
@@ -124,9 +124,9 @@ This Tab allows to subset the CMEMS products by bounding box, variables, depths 
 
 Below I am going to display a more detailed image of the "TAB 1: netCDF-Download". With different coulours are highlighted  the different "TAB" sections.
 
-![Imgur](https://i.imgur.com/)
+![Imgur](https://i.imgur.com/1LujBpF.png)
 
-![Imgur](https://i.imgur.com/)
+![Imgur](https://i.imgur.com/OcKysIV.png)
 
 I can summarise the workflow of the "TAB 1: netCDF-Download" as the following:
 
