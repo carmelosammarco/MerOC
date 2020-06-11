@@ -16,7 +16,7 @@ Many thanks to visit this page and try this software.
 
 Python software containing functions for simplifying the netCDF files download and manipulations. The registration to the [CMEMS web portal](http://marine.copernicus.eu) (by Copernicus) is required to be able to use the download services (TAB1:netCDF-Download). The other tools (TAB2:netCDF-Manipulations) can be used without any registration.
 
-![Imgur](https://i.imgur.com/ub2FHrm.jpg?1)
+![Imgur](https://i.imgur.com/)
 
 
 ## Be aware that:
