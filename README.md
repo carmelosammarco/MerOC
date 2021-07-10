@@ -2,11 +2,13 @@
  
 [![Build Status](https://travis-ci.com/carmelosammarco/MerOC.png)](https://travis-ci.com/carmelosammarco/MerOC) [![Build status](https://ci.appveyor.com/api/projects/status/qqy9y9iu1a473qk4?svg=true)](https://ci.appveyor.com/project/carmelosammarco/meroc) [![PyPi](https://img.shields.io/badge/PyPi-Project-yellow.svg)](https://pypi.org/project/MerOC/) [![Gitter](https://badges.gitter.im/MerOC/community.svg)](https://gitter.im/MerOC/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
+<p align="center">
+  <img width="" height="200" src='MerOC/DATA/LOGO.gif'>
+</p>
+
 **I developed this software because motivated to improve my efficiency and productivity. It is just an attemp/idea/prototype and it is not fully optimased or considered stable.**
 
-**This project gave me also ideas to develop other tools** as [tool4NC](https://github.com/carmelosammarco/tool4NC), [JupLab4NetCDF](https://github.com/carmelosammarco/JupLab4NetCDF) and [ads4MO](https://github.com/carmelosammarco/ads4MO). To know more about them just visit the projects web pages which are hyperlinked above.
-
-I created also a **chat-community** powered by "Gitter" where is possible have an exchange of ideas,functionalities,bugs and many more. Just click ![Gitter](https://badges.gitter.im/MerOC/community.svg) to acces the chat room.
+**This project gave me also ideas to develop other tools** as [tool4NC](https://github.com/carmelosammarco/tool4NC), [JupLab4NetCDF](https://github.com/carmelosammarco/JupLab4NetCDF), [FTPsubsetMO](https://github.com/carmelosammarco/FTPsubsetMO) and [ads4MO](https://github.com/carmelosammarco/ads4MO). To know more about them just visit the projects web pages which are hyperlinked above.
 
 Many thanks to visit this page and try this software.
 
@@ -16,7 +18,7 @@ Many thanks to visit this page and try this software.
 
 Python software containing functions for simplifying the netCDF files download and manipulations. The registration to the [CMEMS web portal](http://marine.copernicus.eu) (by Copernicus) is required to be able to use the download services (TAB1:netCDF-Download). The other tools (TAB2:netCDF-Manipulations) can be used without any registration.
 
-![Imgur](https://i.imgur.com/xPZ0p6y.jpg)
+![Imgur](https://i.imgur.com/4V1QRMLl.jpg)
 
 
 ## Be aware that:
@@ -124,7 +126,7 @@ This Tab allows to subset the CMEMS products by bounding box, variables, depths 
 
 Below I am going to display a more detailed image of the "TAB 1: netCDF-Download". With different coulours are highlighted  the different "TAB" sections.
 
-![Imgur](https://i.imgur.com/1LujBpF.png)
+![Imgur](https://i.imgur.com/ECBf33o.png)
 
 ![Imgur](https://i.imgur.com/OcKysIV.png)
 
