@@ -1,6 +1,6 @@
 # MerOC    
  
-[![Build Status](https://travis-ci.com/carmelosammarco/MerOC.png)](https://travis-ci.com/carmelosammarco/MerOC) [![Build status](https://ci.appveyor.com/api/projects/status/qqy9y9iu1a473qk4?svg=true)](https://ci.appveyor.com/project/carmelosammarco/meroc) [![PyPi](https://img.shields.io/badge/PyPi-Project-yellow.svg)](https://pypi.org/project/MerOC/) 
+[![Build Status](https://app.travis-ci.com/carmelosammarco/MerOC.svg?branch=master)](https://app.travis-ci.com/carmelosammarco/MerOC.svg?branch=master) [![PyPi](https://img.shields.io/badge/PyPi-Project-yellow.svg)](https://pypi.org/project/MerOC/) 
 
 <p align="center">
   <img width="" height="200" src='MerOC/DATA/LOGO.gif'>
